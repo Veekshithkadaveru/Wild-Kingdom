@@ -1,0 +1,402 @@
+{
+  "animals": [
+    {
+      "id": "TIGER",
+      "name": "Tiger",
+      "subtitle": "Panthera tigris",
+      "symbol": "tiger_sym_1",
+      "background": "tiger_back_1",
+      "accentColor": "#FF6F00",
+      "heroFact": "The tiger is the largest wild cat on Earth and the apex predator of the Asian jungle.",
+      "tabs": [
+        {
+          "id": "FACTS",
+          "label": "Facts",
+          "cards": [
+            { "id": 1, "title": "Solitary Hunters", "category": "Behaviour",
+              "body": "Tigers are solitary animals that live and hunt alone. Each tiger maintains a large territory — up to 100 square kilometres — which it marks with scent, scratches on trees, and roars. They rarely tolerate other tigers except during mating season." },
+            { "id": 2, "title": "Night Vision Masters", "category": "Senses",
+              "body": "Tigers have eyes designed for night hunting. Their pupils can dilate extremely wide to capture maximum light, and a reflective layer behind the retina called the tapetum lucidum makes their eyes glow in the dark and amplifies available light sixfold compared to humans." },
+            { "id": 3, "title": "Ambush Predators", "category": "Hunting",
+              "body": "Tigers do not chase prey over long distances. Instead they stalk silently through cover, freezing completely when prey looks their direction, before launching an explosive burst from close range — typically under 20 metres. Their striped coat provides perfect camouflage in dappled jungle light." },
+            { "id": 4, "title": "Powerful Swimmers", "category": "Behaviour",
+              "body": "Unlike most cats, tigers love water. They are strong swimmers and will readily enter rivers and lakes to cool down, play, and even hunt. Bengal tigers in the Sundarbans mangrove delta are known to swim between islands and hunt prey in water." },
+            { "id": 5, "title": "Unique Stripe Patterns", "category": "Biology",
+              "body": "Every tiger's stripe pattern is completely unique — like a human fingerprint. No two tigers in the world have identical stripes. Researchers use photographic identification of stripe patterns to track individual tigers across camera trap networks in the wild." }
+          ]
+        },
+        {
+          "id": "STATS",
+          "label": "Stats",
+          "cards": [
+            { "id": 6, "title": "Size & Weight", "category": "Physical",
+              "body": "Male tigers weigh 180–300kg and measure up to 3.3 metres from nose to tail. Females are significantly smaller at 100–167kg. The Siberian tiger is the largest subspecies, while the Sumatran tiger is the smallest. A tiger's tail alone can reach 1 metre in length." },
+            { "id": 7, "title": "Speed & Power", "category": "Physical",
+              "body": "Tigers can reach speeds of 49–65 km/h in short bursts. Their hind legs are longer than their front legs, giving them a bounding gait built for explosive acceleration. A single swipe of a tiger's paw can kill an adult deer and has enough force to break a bear's spine." },
+            { "id": 8, "title": "Diet & Hunting Success", "category": "Diet",
+              "body": "Tigers prey primarily on deer, wild boar, and gaur. An adult tiger needs around 9kg of meat per day but typically eats only every 3–4 days, consuming up to 40kg in a single meal. Their hunting success rate is only 10–15% — they fail more than they succeed." },
+            { "id": 9, "title": "Lifespan", "category": "Biology",
+              "body": "Wild tigers typically live 10–15 years. In captivity with no hunting pressure, disease risk, or territorial conflict, they can reach 20–26 years. Most wild tigers die from starvation when age or injury prevents effective hunting, or from conflict with other tigers." },
+            { "id": 10, "title": "Territory & Range", "category": "Habitat",
+              "body": "Tigers are found across Asia from Russia's far east to Indonesia. Their range has shrunk by 95% in the last century. Male territories can span 60–100 km² while females occupy smaller 20–40 km² ranges that are often contained within a male's larger territory." }
+          ]
+        },
+        {
+          "id": "CONSERVATION",
+          "label": "Conservation",
+          "cards": [
+            { "id": 11, "title": "Endangered Status", "category": "Status",
+              "body": "Tigers are classified as Endangered on the IUCN Red List. The global wild tiger population is estimated at just 3,900–4,500 individuals — a devastating decline from over 100,000 at the start of the 20th century. Three subspecies have already gone extinct in the last 80 years." },
+            { "id": 12, "title": "Habitat Loss", "category": "Threats",
+              "body": "The primary threat to tigers is habitat destruction. As human populations expand into forests for agriculture, logging, and development, tigers lose both the territory they need to survive and the prey animals that depend on the same ecosystems." },
+            { "id": 13, "title": "Poaching Crisis", "category": "Threats",
+              "body": "Tigers are heavily poached for their bones, skin, and organs used in traditional medicine markets across Asia. A single tiger can fetch tens of thousands of dollars on the black market. Despite international bans, illegal trade continues to threaten every remaining tiger population." },
+            { "id": 14, "title": "TX2 Conservation Goal", "category": "Action",
+              "body": "In 2010, tiger range countries committed to the TX2 goal — doubling the wild tiger population by 2022. While this target was not fully met, significant progress was made. India's tiger population grew from 1,411 in 2006 to over 3,000 by 2022, representing a genuine conservation success story." },
+            { "id": 15, "title": "How You Can Help", "category": "Action",
+              "body": "Support WWF's tiger conservation programme. Never purchase products made from tiger parts. When visiting tiger range countries, choose responsible ecotourism operators that contribute to local conservation. Reducing your carbon footprint also helps protect the jungle habitats tigers depend on." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LION",
+      "name": "Lion",
+      "subtitle": "Panthera leo",
+      "symbol": "tiger_sym_2",
+      "background": "tiger_back_2",
+      "accentColor": "#F9A825",
+      "heroFact": "The lion is the only truly social wild cat, living in family groups called prides of up to 30 individuals.",
+      "tabs": [
+        {
+          "id": "FACTS",
+          "label": "Facts",
+          "cards": [
+            { "id": 1, "title": "Pride Social Structure", "category": "Behaviour",
+              "body": "Lions are unique among wild cats in living in social groups called prides. A pride typically consists of 2–3 related males, a group of related females, and their cubs. The females do most of the hunting while males defend the territory and protect cubs from rival males." },
+            { "id": 2, "title": "The Roar", "category": "Communication",
+              "body": "A lion's roar can be heard up to 8 kilometres away and is used to communicate territory boundaries to rival prides and locate separated pride members. Lions roar most frequently at dawn and dusk. Both males and females roar, though males produce the deeper, more resonant calls." },
+            { "id": 3, "title": "Cooperative Hunting", "category": "Hunting",
+              "body": "Lionesses hunt cooperatively using sophisticated team strategies — some members act as chasers while others flank and ambush prey. This teamwork allows them to take down animals much larger than themselves including buffalo, giraffe, and even hippos on rare occasions." },
+            { "id": 4, "title": "The Mane's Purpose", "category": "Biology",
+              "body": "A lion's mane signals health and genetic quality to females and intimidates rival males. Darker, fuller manes indicate higher testosterone levels and better nutrition. Males with impressive manes father more cubs. The mane also protects the neck during fights with rival males." },
+            { "id": 5, "title": "Sleeping Champions", "category": "Behaviour",
+              "body": "Lions sleep up to 20 hours per day — more than almost any other mammal. This extreme rest conserves energy in the hot African savanna where hunting at midday is ineffective. Lions are most active at dawn and dusk and hunt primarily at night using their superior low-light vision." }
+          ]
+        },
+        {
+          "id": "STATS",
+          "label": "Stats",
+          "cards": [
+            { "id": 6, "title": "Size & Weight", "category": "Physical",
+              "body": "Male lions weigh 150–250kg with a body length of up to 2.5 metres plus a 1-metre tail. Females are smaller at 120–182kg. The Barbary lion, now extinct in the wild, was the largest subspecies reaching up to 300kg." },
+            { "id": 7, "title": "Speed & Strength", "category": "Physical",
+              "body": "Lions can reach 80 km/h in short bursts but cannot sustain this speed. Their power lies in explosive short-distance acceleration and immense strength — a lion can drag a zebra carcass that three men could not move. Their bite force of 650 PSI can crush bone." },
+            { "id": 8, "title": "Diet", "category": "Diet",
+              "body": "Lions are carnivores feeding primarily on wildebeest, zebra, buffalo, and antelope. A lion needs around 7kg of meat per day on average. Males eat first at kills despite females doing most of the hunting — a source of significant tension within pride dynamics." },
+            { "id": 9, "title": "Lifespan", "category": "Biology",
+              "body": "Wild lions live 10–14 years, with males typically living shorter lives due to the constant physical demands of territorial defence. Females often live longer — up to 16 years in the wild. In captivity, lions regularly reach 20–25 years." },
+            { "id": 10, "title": "Territory", "category": "Habitat",
+              "body": "A pride's territory ranges from 20–400 km² depending on prey availability. Pride members constantly patrol and scent-mark boundaries. Rival males attempting to take over a pride will kill existing cubs to bring females back into breeding condition — a brutal but evolutionarily effective strategy." }
+          ]
+        },
+        {
+          "id": "CONSERVATION",
+          "label": "Conservation",
+          "cards": [
+            { "id": 11, "title": "Vulnerable Status", "category": "Status",
+              "body": "Lions are classified as Vulnerable on the IUCN Red List. African lion populations have declined by approximately 43% over the past 21 years. Current estimates put the wild African lion population at 20,000–25,000 individuals, down from over 200,000 fifty years ago." },
+            { "id": 12, "title": "Human-Wildlife Conflict", "category": "Threats",
+              "body": "As human settlements expand into lion habitat, conflicts increase dramatically. Lions that prey on livestock are often killed by farmers in retaliation. This conflict is the leading cause of lion mortality in many areas and creates deeply complex challenges for conservation efforts." },
+            { "id": 13, "title": "Trophy Hunting Debate", "category": "Threats",
+              "body": "Legal trophy hunting remains controversial. Proponents argue that well-regulated hunting generates conservation funding and incentivises local communities to protect lions. Critics argue that even legal hunting removes key individuals from small populations and the practice is ethically indefensible." },
+            { "id": 14, "title": "Asiatic Lion Success", "category": "Action",
+              "body": "The Asiatic lion, once found across Southwest Asia, now survives only in India's Gir Forest. Through intensive protection, the population has grown from fewer than 200 lions in the 1960s to over 670 today — one of conservation's genuine success stories." },
+            { "id": 15, "title": "How You Can Help", "category": "Action",
+              "body": "Support the African Wildlife Foundation or Lion Recovery Fund. If visiting Africa, choose operators with verified conservation credentials. Boycott products made from lion bone. Advocate against unregulated trophy hunting in your country's policy discussions." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "LEOPARD",
+      "name": "Leopard",
+      "subtitle": "Panthera pardus",
+      "symbol": "tiger_sym_3",
+      "background": "tiger_back_3",
+      "accentColor": "#558B2F",
+      "heroFact": "The leopard is the most adaptable and widespread of all the big cats, surviving in habitats from rainforest to desert.",
+      "tabs": [
+        {
+          "id": "FACTS", "label": "Facts",
+          "cards": [
+            { "id": 1, "title": "Master of Adaptation", "category": "Behaviour",
+              "body": "Leopards are remarkably adaptable, living in more habitats than any other wild cat — dense rainforests, open savanna, mountain ranges, semi-arid desert, and even urban fringes. This flexibility has allowed them to survive in areas where lions and tigers have long since disappeared." },
+            { "id": 2, "title": "Tree Climbers", "category": "Behaviour",
+              "body": "Leopards are exceptional climbers and routinely haul prey — sometimes heavier than themselves — up into trees to cache kills away from lions and hyenas. A leopard can carry a carcass three times its body weight vertically up a tree trunk using its extraordinary upper body strength." },
+            { "id": 3, "title": "Ghost Cats", "category": "Hunting",
+              "body": "Leopards are notoriously difficult to observe even in areas with high populations. Their secretive nocturnal habits, cryptic rosette coat pattern, and preference for dense vegetation make them almost invisible. Researchers with camera traps in prime leopard habitat regularly go weeks without a sighting." },
+            { "id": 4, "title": "Rosette Patterns", "category": "Biology",
+              "body": "A leopard's coat pattern consists of irregular black rosettes — circular clusters of spots — on a tawny background. Black leopards (often called black panthers) carry the same pattern visible in certain lighting as a genetic colour variant. Individual leopards can be identified by their unique rosette arrangements." },
+            { "id": 5, "title": "Versatile Diet", "category": "Diet",
+              "body": "Leopards have the most varied diet of any big cat — recorded prey includes over 90 species from beetles and baboons to young giraffes. This dietary flexibility is key to their survival across such diverse habitats. In some areas, domestic dogs are a significant prey item." }
+          ]
+        },
+        {
+          "id": "STATS", "label": "Stats",
+          "cards": [
+            { "id": 6, "title": "Size & Weight", "category": "Physical",
+              "body": "Leopards are the smallest of the four big cats. Males weigh 30–90kg with considerable variation across subspecies — the massive Amur leopard of Russia can exceed 75kg while the small Arabian leopard rarely exceeds 30kg. Body length ranges from 1–1.9 metres." },
+            { "id": 7, "title": "Speed & Agility", "category": "Physical",
+              "body": "Leopards can reach 58 km/h and are extraordinary leapers — jumping up to 6 metres horizontally and 3 metres vertically from a standing position. Their flexibility allows them to descend trees headfirst, an ability shared by very few large mammals." },
+            { "id": 8, "title": "Territory", "category": "Habitat",
+              "body": "Leopard territories range enormously based on habitat and prey density — from 8 km² in productive African woodland to over 1,000 km² in arid Namibian desert. Territories are scent-marked with urine and scratch marks and vigorously defended against same-sex rivals." },
+            { "id": 9, "title": "Lifespan", "category": "Biology",
+              "body": "Wild leopards typically live 12–17 years. In captivity they can reach 23 years. Females raise cubs alone without any involvement from the male parent. Cubs stay with their mother for 18–24 months learning to hunt before establishing independent territories." },
+            { "id": 10, "title": "Subspecies", "category": "Biology",
+              "body": "Nine leopard subspecies are currently recognised, ranging from the African leopard to the critically endangered Amur leopard of Russia and China with fewer than 100 individuals remaining in the wild — making it one of the rarest wild cats on Earth." }
+          ]
+        },
+        {
+          "id": "CONSERVATION", "label": "Conservation",
+          "cards": [
+            { "id": 11, "title": "Vulnerable Status", "category": "Status",
+              "body": "The leopard is classified as Vulnerable globally but several subspecies are Critically Endangered. The Amur leopard has fewer than 100 individuals. The Arabian leopard may number fewer than 200. Despite their adaptability, leopards have lost over 75% of their historical range." },
+            { "id": 12, "title": "Conflict with Humans", "category": "Threats",
+              "body": "Leopards living near human settlements frequently prey on livestock and occasionally attack people, leading to severe retaliatory killing. In India, leopards living in sugarcane fields adjacent to villages create complex and often fatal human-wildlife conflict situations." },
+            { "id": 13, "title": "Illegal Trade", "category": "Threats",
+              "body": "Leopard skins, bones, and teeth are traded illegally across Asia and Africa. A single leopard skin can sell for thousands of dollars. Their spotted fur remains highly coveted despite international protection under CITES Appendix I since 1975." },
+            { "id": 14, "title": "Amur Leopard Recovery", "category": "Action",
+              "body": "The Amur leopard recovery programme in Russia and China represents one of conservation's most urgent efforts. Land Land of the Leopard National Park was created in 2012 specifically to protect the remaining population. Camera trap monitoring suggests slow but real population growth." },
+            { "id": 15, "title": "How You Can Help", "category": "Action",
+              "body": "Support the Amur Leopard and Tiger Alliance. Refuse to purchase spotted cat fur products. Support organisations working on human-wildlife coexistence programmes that compensate farmers for livestock losses, reducing the motivation for retaliatory killing." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "WOLF",
+      "name": "Wolf",
+      "subtitle": "Canis lupus",
+      "symbol": "tiger_sym_4",
+      "background": "tiger_back_4",
+      "accentColor": "#546E7A",
+      "heroFact": "Wolves are the ancestors of all domestic dogs and are among the most socially complex and cooperative hunters on Earth.",
+      "tabs": [
+        {
+          "id": "FACTS", "label": "Facts",
+          "cards": [
+            { "id": 1, "title": "Pack Hierarchy", "category": "Behaviour",
+              "body": "Wolves live in family packs typically consisting of 5–10 individuals led by a breeding pair (the alpha male and female). Pack members are usually the offspring of the alpha pair from previous years. The pack cooperates in hunting, pup-rearing, and territorial defence — a level of social complexity rivalling primates." },
+            { "id": 2, "title": "Howling Communication", "category": "Communication",
+              "body": "Wolf howls can travel up to 10 kilometres and serve multiple purposes — assembling the pack, communicating location, strengthening social bonds, and warning rival packs. Each wolf has a unique howl recognisable to pack members. Group howls create a chorus that can sound like a much larger group than is actually present." },
+            { "id": 3, "title": "Endurance Hunters", "category": "Hunting",
+              "body": "Unlike cats that rely on explosive speed, wolves are endurance hunters capable of pursuing prey for hours over many kilometres. They test herds of elk or caribou repeatedly to identify weak or injured individuals, then pursue relentlessly until the prey tires. Pack coordination allows takedown of prey ten times a wolf's size." },
+            { "id": 4, "title": "Keystone Species", "category": "Ecology",
+              "body": "Wolves are a keystone species whose presence reshapes entire ecosystems. When wolves were reintroduced to Yellowstone in 1995, elk changed their grazing patterns to avoid open areas, allowing riverbanks to revegetate, which stabilised river courses, creating habitat for beavers, fish, and birds — a cascade effect called a trophic cascade." },
+            { "id": 5, "title": "Mate for Life", "category": "Behaviour",
+              "body": "Alpha wolves typically mate for life and produce one litter of 4–6 pups per year. The entire pack participates in raising pups — regurgitating food for them, babysitting, playing, and teaching hunting skills. This cooperative pup-rearing is one reason wolf packs function as such tight-knit family units." }
+          ]
+        },
+        {
+          "id": "STATS", "label": "Stats",
+          "cards": [
+            { "id": 6, "title": "Size & Weight", "category": "Physical",
+              "body": "Grey wolves weigh 25–80kg with males significantly larger than females. The largest wolves come from Canada and Russia, while wolves in southern regions are generally smaller. Body length reaches up to 1.6 metres with a 50cm tail. The record heaviest wild wolf weighed 96kg." },
+            { "id": 7, "title": "Speed & Stamina", "category": "Physical",
+              "body": "Wolves run at a comfortable travel pace of 8–9 km/h for hours and can sprint up to 55–70 km/h. Their large feet act as natural snowshoes and their deep chest houses enormous lung capacity. Wolves can cover 80 kilometres in a single night while tracking prey across winter landscapes." },
+            { "id": 8, "title": "Diet", "category": "Diet",
+              "body": "Wolves are apex predators consuming primarily large ungulates — elk, moose, deer, caribou, bison, and musk ox. They also eat smaller prey, beaver, fish, and berries when large prey is scarce. An adult wolf can consume 9kg of meat in a single feeding and may go days between meals." },
+            { "id": 9, "title": "Lifespan", "category": "Biology",
+              "body": "Wild wolves typically live 6–8 years, though some individuals reach 13. Mortality is high from territorial conflicts with other packs, prey injuries during hunts, mange, and human persecution. In captivity wolves regularly live 14–16 years without these pressures." },
+            { "id": 10, "title": "Range", "category": "Habitat",
+              "body": "Wolves once ranged across virtually all of the Northern Hemisphere. Today they survive in North America, Europe, and Asia but at a fraction of their former range. Their range collapsed due to systematic persecution throughout the 19th and 20th centuries, though conservation efforts have enabled recovery in some regions." }
+          ]
+        },
+        {
+          "id": "CONSERVATION", "label": "Conservation",
+          "cards": [
+            { "id": 11, "title": "Conservation Status", "category": "Status",
+              "body": "The grey wolf is classified as Least Concern globally but many regional populations remain endangered or threatened. The Mexican grey wolf, the most endangered subspecies, numbers fewer than 200 in the wild. European wolf populations have recovered significantly but remain contested." },
+            { "id": 12, "title": "Livestock Conflict", "category": "Threats",
+              "body": "Conflict with livestock farmers is the primary obstacle to wolf recovery across their range. Wolves that prey on sheep or cattle are frequently killed illegally by ranchers. Finding effective coexistence solutions — compensation programmes, guardian dogs, electric fencing — is central to wolf conservation." },
+            { "id": 13, "title": "Legal Persecution", "category": "Threats",
+              "body": "Wolves remain legally hunted across much of their range. In the US, delisting wolves from the Endangered Species Act has allowed states to open wolf hunting seasons. In Europe, farmers and hunting groups lobby continuously for increased culling quotas despite scientific evidence of wolf population fragility." },
+            { "id": 14, "title": "Yellowstone Success", "category": "Action",
+              "body": "The 1995 reintroduction of 31 wolves to Yellowstone National Park is one of conservation's great triumphs. The population grew to over 100 wolves, triggering dramatic ecosystem recovery. The Yellowstone wolf project demonstrated conclusively that large predator restoration benefits entire ecosystems." },
+            { "id": 15, "title": "How You Can Help", "category": "Action",
+              "body": "Support Defenders of Wildlife or the Wolf Conservation Center. Contact elected representatives to support legal protections for wolves. If you are a livestock owner, explore compensation programmes and non-lethal deterrence methods. Share accurate information about wolf behaviour to counter misinformation." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "BEAR",
+      "name": "Bear",
+      "subtitle": "Ursus arctos",
+      "symbol": "tiger_sym_5",
+      "background": "tiger_back_5",
+      "accentColor": "#4E342E",
+      "heroFact": "Bears are among the most intelligent land mammals, capable of problem solving, tool use, and long-term memory rivalling primates.",
+      "tabs": [
+        {
+          "id": "FACTS", "label": "Facts",
+          "cards": [
+            { "id": 1, "title": "Hibernation", "category": "Behaviour",
+              "body": "Bears enter a state called torpor during winter — not true hibernation — in which their heart rate drops from 40–50 beats per minute to just 8, and body temperature decreases slightly. They can go 100 days without eating, drinking, or urinating, living entirely off fat reserves built up in summer and autumn." },
+            { "id": 2, "title": "Exceptional Intelligence", "category": "Biology",
+              "body": "Bears have the largest brain relative to body size of any carnivore. They solve complex puzzles, remember food sources across years, use rocks as tools to scratch themselves, and have demonstrated self-recognition in mirror tests — an ability previously thought limited to great apes, dolphins, and elephants." },
+            { "id": 3, "title": "Salmon Fishing", "category": "Hunting",
+              "body": "Brown bears gathering at salmon rivers in autumn are one of nature's great spectacles. Individual bears develop distinct fishing techniques — some wade and pin salmon with erosion, others leap into the water, and the most skilled catch leaping salmon directly in their mouths. Bears can gain 180kg in preparation for winter." },
+            { "id": 4, "title": "Omnivorous Diet", "category": "Diet",
+              "body": "Despite their fearsome reputation, bears are primarily herbivores. Up to 90% of a brown bear's diet consists of plants — grasses, berries, roots, and nuts. They supplement this with insects, honey, fish, and occasional mammals. This opportunistic omnivory allows bears to thrive across enormously diverse habitats." },
+            { "id": 5, "title": "Mothers and Cubs", "category": "Behaviour",
+              "body": "Female bears give birth to 1–3 cubs during winter denning. Cubs are born tiny — barely 500g — and are entirely dependent on their mother for 2–3 years. Mother bears are among the most protective parents in the animal kingdom and will charge and kill animals many times their size to protect cubs." }
+          ]
+        },
+        {
+          "id": "STATS", "label": "Stats",
+          "cards": [
+            { "id": 6, "title": "Size & Weight", "category": "Physical",
+              "body": "Brown bears are the second largest land carnivore after polar bears. Males weigh 135–390kg with some Kodiak bears reaching 680kg. Body length reaches 2.8 metres. The size difference between males and females (sexual dimorphism) is extreme — males can be twice the weight of females." },
+            { "id": 7, "title": "Strength", "category": "Physical",
+              "body": "Brown bears are extraordinarily powerful — capable of lifting rocks weighing over 300kg, flipping boulders in search of insects, and bending metal food storage containers. Their bite force of 1,200 PSI can crush a bowling ball. Despite their bulk they can run at 55 km/h over short distances." },
+            { "id": 8, "title": "Senses", "category": "Biology",
+              "body": "Bears have the most powerful sense of smell of any land mammal — estimated at 2,100 times more sensitive than a human's. They can smell food from 20 miles away and detect human scent on objects handled days earlier. Their hearing is twice as acute as humans though their eyesight is relatively poor." },
+            { "id": 9, "title": "Lifespan", "category": "Biology",
+              "body": "Wild brown bears live 20–30 years. In captivity they can reach 50 years. Males live shorter lives due to territorial fighting. The greatest recorded age for a wild brown bear was 37 years for a female grizzly in Yellowstone National Park." },
+            { "id": 10, "title": "Range & Habitat", "category": "Habitat",
+              "body": "Brown bears inhabit forests, tundra, mountain slopes, and coastal areas across North America, Europe, and Asia. Russia hosts the world's largest brown bear population at over 100,000 individuals. The North American grizzly bear is a subspecies of the brown bear." }
+          ]
+        },
+        {
+          "id": "CONSERVATION", "label": "Conservation",
+          "cards": [
+            { "id": 11, "title": "Conservation Status", "category": "Status",
+              "body": "The brown bear is classified as Least Concern globally with an estimated 200,000 individuals worldwide. However, many regional populations are threatened — the Cantabrian brown bear in Spain numbers fewer than 300, and the Syrian brown bear may be functionally extinct." },
+            { "id": 12, "title": "Habitat Fragmentation", "category": "Threats",
+              "body": "As human development fragments bear habitat, populations become isolated and genetically weakened. Bears attempting to cross roads and developments are frequently killed by vehicles — road mortality is a significant threat in many parts of Europe and North America." },
+            { "id": 13, "title": "Human Conflict", "category": "Threats",
+              "body": "Bears that learn to access human food — garbage, livestock, beehives — become habituated and are typically killed as problem animals. The saying 'a fed bear is a dead bear' captures this tragedy. Proper food storage and waste management are the most critical human behaviours for bear conservation." },
+            { "id": 14, "title": "Grizzly Recovery", "category": "Action",
+              "body": "Grizzly bears in the lower 48 US states were hunted to near-extinction by the 1970s with fewer than 1,000 remaining. Federal protection and recovery efforts have grown the Greater Yellowstone population to over 700 bears. Delisting from the Endangered Species Act remains bitterly contested." },
+            { "id": 15, "title": "How You Can Help", "category": "Action",
+              "body": "Store food properly in bear country — use certified bear canisters and clean up all food scraps. Support the Great Bear Foundation or Vital Ground conservation organisations. Advocate for wildlife crossing infrastructure on roads that fragment bear habitat. Oppose trophy hunting of bears in vulnerable populations." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "EAGLE",
+      "name": "Eagle",
+      "subtitle": "Aquila chrysaetos",
+      "symbol": "tiger_sym_6",
+      "background": "tiger_back_1",
+      "accentColor": "#1565C0",
+      "heroFact": "Eagles have eyesight up to 8 times more powerful than humans and can spot a rabbit from nearly 3 kilometres away.",
+      "tabs": [
+        {
+          "id": "FACTS", "label": "Facts",
+          "cards": [
+            { "id": 1, "title": "Extraordinary Vision", "category": "Senses",
+              "body": "Eagles have two foveae (areas of acute vision) compared to one in humans, giving them the ability to see both forward and to the side simultaneously with exceptional detail. They can see ultraviolet light, allowing them to track the urine trails of small mammals across open landscapes." },
+            { "id": 2, "title": "Aerial Masters", "category": "Behaviour",
+              "body": "Golden eagles soar on thermal updrafts for hours without flapping, covering vast territories with minimal energy expenditure. They can reach speeds of 240–320 km/h in a hunting stoop — a near-vertical dive — making them among the fastest animals on Earth when diving." },
+            { "id": 3, "title": "Lifetime Partnerships", "category": "Behaviour",
+              "body": "Eagles mate for life and return to the same nest (called an eyrie) year after year, adding new material each season. The largest eagle nests can reach 4 metres deep and 2.5 metres wide, weighing over a tonne. Pairs perform spectacular aerial courtship displays including locking talons and free-falling together." },
+            { "id": 4, "title": "Powerful Talons", "category": "Hunting",
+              "body": "An eagle's talons are its primary weapon — the grip pressure of a large eagle's talon is estimated at 400–750 PSI, compared to 40 PSI for a human hand. The talons penetrate prey on impact and prevent escape through involuntary muscle contraction. Eagles can carry prey equal to their own body weight." },
+            { "id": 5, "title": "Sibling Competition", "category": "Biology",
+              "body": "In many eagle species, when two eggs hatch, the older and stronger chick frequently kills or starves the younger sibling — a behaviour called Cainism or siblicide. This brutal competition ensures the strongest individual survives when food is limited. Parents rarely intervene to stop it." }
+          ]
+        },
+        {
+          "id": "STATS", "label": "Stats",
+          "cards": [
+            { "id": 6, "title": "Size & Wingspan", "category": "Physical",
+              "body": "Golden eagles have a wingspan of 1.8–2.3 metres and weigh 3–6.5kg. The Steller's sea eagle is the world's heaviest eagle at up to 9kg. The harpy eagle, while lighter, has the largest talons of any eagle — its rear talons can reach the length of a grizzly bear's claws." },
+            { "id": 7, "title": "Speed", "category": "Physical",
+              "body": "In level flight, golden eagles cruise at 45–55 km/h. In a hunting stoop they reach 240–320 km/h — though these figures are debated. The peregrine falcon is generally accepted as faster in a dive. Eagles sacrifice top speed for the carrying power and precision their heavy build provides." },
+            { "id": 8, "title": "Diet", "category": "Diet",
+              "body": "Golden eagles prey primarily on rabbits, hares, squirrels, and ground squirrels. They also take foxes, young deer, and occasionally other birds of prey. In some regions they are known to hunt and kill tortoises, dropping them from height onto rocks to break their shells." },
+            { "id": 9, "title": "Lifespan", "category": "Biology",
+              "body": "Wild golden eagles live up to 30 years — exceptional longevity for a bird. Captive birds have reached 46 years. Their slow reproductive rate (one or two chicks per year at best) makes population recovery from any decline extremely slow, as each bird represents years of investment." },
+            { "id": 10, "title": "Range", "category": "Habitat",
+              "body": "Golden eagles have one of the widest distributions of any eagle — found across North America, Europe, Asia, and parts of North Africa. They favour open and semi-open habitats including mountains, cliffs, and upland moorlands. Their range overlaps extensively with human development, creating frequent conflict." }
+          ]
+        },
+        {
+          "id": "CONSERVATION", "label": "Conservation",
+          "cards": [
+            { "id": 11, "title": "Conservation Status", "category": "Status",
+              "body": "The golden eagle is classified as Least Concern globally. However, several eagle species face severe threats — the Philippine eagle is Critically Endangered with fewer than 800 individuals, and the Spanish imperial eagle numbers only around 500 breeding pairs despite intensive protection." },
+            { "id": 12, "title": "Poisoning Threat", "category": "Threats",
+              "body": "Eagles are highly vulnerable to secondary poisoning when they feed on animals killed with lead ammunition or rodenticides. Lead poisoning from hunting ammunition is now recognised as a leading cause of eagle mortality in North America and Europe. Switching to non-toxic ammunition is a critical conservation action." },
+            { "id": 13, "title": "Wind Turbines", "category": "Threats",
+              "body": "Wind energy turbines kill thousands of eagles annually through collision. The slow reproductive rate of eagles means even moderate mortality can destabilise local populations. Advances in radar-based turbine shutoff systems that detect approaching eagles offer promising mitigation solutions." },
+            { "id": 14, "title": "Bald Eagle Recovery", "category": "Action",
+              "body": "The bald eagle's recovery from near-extinction is one of conservation's great triumphs. Hunting bans, DDT prohibition, and legal protection under the Endangered Species Act allowed the US population to recover from 417 breeding pairs in 1963 to over 9,800 pairs by 2006. It was formally delisted in 2007." },
+            { "id": 15, "title": "How You Can Help", "category": "Action",
+              "body": "Switch to non-lead ammunition if you hunt. Report any injured or dead eagles to wildlife authorities. Support the Raptor Research Foundation. Oppose illegal persecution of eagles by gamekeepers and pigeon fanciers. Advocate for eagle-safe wind farm siting regulations in your country." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "SNAKE",
+      "name": "Snake",
+      "subtitle": "Serpentes",
+      "symbol": "tiger_sym_7",
+      "background": "tiger_back_2",
+      "accentColor": "#2E7D32",
+      "heroFact": "Snakes are found on every continent except Antarctica and have evolved into over 3,700 species occupying almost every habitat on Earth.",
+      "tabs": [
+        {
+          "id": "FACTS", "label": "Facts",
+          "cards": [
+            { "id": 1, "title": "Sensing the World", "category": "Senses",
+              "body": "Snakes sense their environment in ways no other animal can. Their forked tongue collects scent particles and delivers them to the Jacobson's organ in the roof of the mouth — effectively smelling in stereo and tracking direction. Pit vipers and pythons also detect infrared radiation, allowing them to hunt warm-blooded prey in complete darkness." },
+            { "id": 2, "title": "Swallowing Whole", "category": "Diet",
+              "body": "Snakes swallow prey whole without chewing. Their lower jaw is not fused at the front as in other vertebrates — instead the two halves move independently, walking prey into the throat. The ribcage is not fused to a sternum, allowing enormous distension. Large pythons can swallow deer and pigs whole." },
+            { "id": 3, "title": "Venom Evolution", "category": "Biology",
+              "body": "Snake venom evolved from digestive saliva and has diversified into extraordinarily complex chemical cocktails over millions of years. Neurotoxic venoms attack the nervous system causing paralysis. Haemotoxic venoms destroy blood cells and tissue. Some snakes, like the king cobra, produce enough venom to kill an elephant." },
+            { "id": 4, "title": "Shedding Skin", "category": "Biology",
+              "body": "Snakes shed their outer skin layer (ecdysis) multiple times per year as they grow. The eyes cloud over as the old skin separates, temporarily impairing vision and making snakes more defensive. A healthy shed comes off in one complete piece including the eye coverings. Frequency of shedding reflects growth rate." },
+            { "id": 5, "title": "No Eyelids", "category": "Biology",
+              "body": "Snakes have no eyelids — instead their eyes are covered by a transparent scale called a brille or spectacle that is shed with the rest of the skin. This means snakes cannot blink or close their eyes, and they sleep with their eyes open. This feature evolved from lizard ancestors that began burrowing underground." }
+          ]
+        },
+        {
+          "id": "STATS", "label": "Stats",
+          "cards": [
+            { "id": 6, "title": "Size Range", "category": "Physical",
+              "body": "Snakes range from the 10cm Barbados threadsnake — the world's smallest — to the reticulated python which can exceed 6 metres and weigh over 100kg. The anaconda is the heaviest snake, with large females exceeding 250kg. Most species fall between 30cm and 2 metres." },
+            { "id": 7, "title": "Speed", "category": "Physical",
+              "body": "Despite lacking limbs, snakes move with surprising speed. The black mamba can reach 19 km/h on flat ground — fast enough to outpace a running human over short distances. Most species move far more slowly, relying on ambush rather than pursuit. Sidewinder rattlesnakes travel diagonally across sand with remarkable efficiency." },
+            { "id": 8, "title": "Metabolism", "category": "Biology",
+              "body": "Snakes have extraordinarily slow metabolisms and can survive months without food. A large python can reduce its metabolic rate by 70% when fasting and digest prey so completely that very little waste remains. Some species survive on as few as 4–5 meals per year." },
+            { "id": 9, "title": "Lifespan", "category": "Biology",
+              "body": "Lifespan varies enormously across species. Small snakes may live 4–8 years while large constrictors like ball pythons routinely live 30–40 years in captivity. The oldest recorded ball python in captivity reached 47 years. Wild snakes typically live shorter lives due to predation and environmental hazards." },
+            { "id": 10, "title": "Distribution", "category": "Habitat",
+              "body": "Snakes inhabit every continent except Antarctica and have colonised marine environments, mountains above 4,000 metres, tropical rainforests, deserts, and urban areas. Sea snakes are fully aquatic. Over 600 snake species are venomous, though fewer than 200 are considered medically significant threats to humans." }
+          ]
+        },
+        {
+          "id": "CONSERVATION", "label": "Conservation",
+          "cards": [
+            { "id": 11, "title": "Conservation Status", "category": "Status",
+              "body": "Snake populations globally are declining, with one in five species threatened with extinction. The IUCN assesses many species as Data Deficient — simply too little is known about most snake species to accurately assess their status. This knowledge gap itself represents a conservation crisis." },
+            { "id": 12, "title": "Persecution", "category": "Threats",
+              "body": "Snakes are among the most persecuted animals on Earth — killed on sight across much of their range by people who fear them. Even non-venomous species are routinely killed unnecessarily. Education about snake behaviour and the ecological importance of snakes is one of the most impactful conservation interventions possible." },
+            { "id": 13, "title": "Illegal Trade", "category": "Threats",
+              "body": "Millions of snakes are captured annually for the exotic pet trade, the leather industry, and traditional medicine. Reticulated pythons and ball pythons are among the most traded reptiles globally. Wild capture for the pet trade has devastated some local populations." },
+            { "id": 14, "title": "Ecological Importance", "category": "Action",
+              "body": "Snakes play critical roles in ecosystems as both predator and prey. They control rodent populations that damage crops and spread disease — a single king snake can consume over 50 rodents per year. Removing snakes from an ecosystem causes cascading effects on rodent populations and the predators that depend on snakes as food." },
+            { "id": 15, "title": "How You Can Help", "category": "Action",
+              "body": "Never kill a snake — even venomous species play vital ecological roles and attacks on humans are almost always defensive. If you encounter a snake, give it space and it will leave. Support the Rattlesnake Conservancy or Orianne Society. Refuse to purchase wild-caught reptiles as pets. Report illegal wildlife trade to authorities." }
+          ]
+        }
+      ]
+    }
+  ]
+}
