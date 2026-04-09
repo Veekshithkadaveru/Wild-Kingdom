@@ -13,32 +13,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.yourname.wildkingdom.data.model.Severity
-
-fun severityColor(severity: Severity): Color = when (severity) {
-    Severity.CRITICAL -> Color(0xFFC62828)
-    Severity.HIGH -> Color(0xFFE65100)
-    Severity.MEDIUM -> Color(0xFFF9A825)
-}
 
 @Composable
-fun SeverityBadge(severity: Severity) {
-    val color = severityColor(severity)
-
+fun CategoryBadge(category: String, accent: Color) {
     Box(
         modifier = Modifier
             .clip(RoundedCornerShape(6.dp))
-            .background(color.copy(alpha = 0.12f))
+            .background(accent.copy(alpha = 0.12f))
             .padding(horizontal = 10.dp, vertical = 4.dp)
     ) {
         Text(
-            text = severity.name,
+            text = category,
             style = MaterialTheme.typography.labelSmall.copy(
                 fontWeight = FontWeight.Bold,
                 letterSpacing = 0.8.sp,
                 fontSize = 10.sp
             ),
-            color = color
+            color = accent
         )
     }
 }

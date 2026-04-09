@@ -1,5 +1,7 @@
 package com.yourname.wildkingdom.ui.components
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -18,13 +20,10 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import com.yourname.wildkingdom.ui.components.AppIcons
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.ripple
-import androidx.compose.animation.core.animateFloatAsState
-import androidx.compose.animation.core.spring
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -39,36 +38,35 @@ import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.yourname.wildkingdom.R
-import com.yourname.wildkingdom.data.model.Tip
+import com.yourname.wildkingdom.data.model.Fact
 import com.yourname.wildkingdom.ui.theme.DarkBorder
 import com.yourname.wildkingdom.ui.theme.TextPrimary
 import com.yourname.wildkingdom.ui.theme.TextSecondary
 import com.yourname.wildkingdom.ui.theme.TextTertiary
 
 @Composable
-fun TipCard(
-    tip: Tip,
+fun FactCard(
+    fact: Fact,
     accent: Color,
     isBookmarked: Boolean,
     onBookmarkToggle: () -> Unit,
     index: Int,
-    disasterLabel: String? = null,
-    disasterIcon: String? = null
+    animalName: String? = null,
+    animalSymbol: String? = null
 ) {
-    val sevColor = severityColor(tip.severity)
     val context = LocalContext.current
-    val iconResId = remember(disasterIcon) {
-        if (disasterIcon != null)
-            context.resources.getIdentifier(disasterIcon, "drawable", context.packageName)
+    val symbolResId = remember(animalSymbol) {
+        if (animalSymbol != null)
+            context.resources.getIdentifier(animalSymbol, "drawable", context.packageName)
         else 0
     }
 
@@ -104,23 +102,15 @@ fun TipCard(
                     )
                     drawRoundRect(
                         brush = Brush.horizontalGradient(
-                            colors = listOf(
-                                accent.copy(alpha = 0.08f),
-                                Color.Transparent
-                            ),
-                            startX = 0f,
-                            endX = size.width * 0.4f
+                            colors = listOf(accent.copy(alpha = 0.08f), Color.Transparent),
+                            startX = 0f, endX = size.width * 0.4f
                         ),
                         cornerRadius = CornerRadius(13.dp.toPx())
                     )
                     drawRoundRect(
                         brush = Brush.verticalGradient(
-                            colors = listOf(
-                                Color.White.copy(alpha = 0.04f),
-                                Color.Transparent
-                            ),
-                            startY = 0f,
-                            endY = size.height * 0.3f
+                            colors = listOf(Color.White.copy(alpha = 0.04f), Color.Transparent),
+                            startY = 0f, endY = size.height * 0.3f
                         ),
                         cornerRadius = CornerRadius(13.dp.toPx())
                     )
@@ -143,7 +133,7 @@ fun TipCard(
                     .fillMaxHeight()
                     .padding(vertical = 10.dp)
                     .clip(RoundedCornerShape(2.dp))
-                    .background(sevColor)
+                    .background(accent)
             )
 
             Column(
@@ -151,12 +141,12 @@ fun TipCard(
                     .weight(1f)
                     .padding(start = 13.dp, end = 6.dp, top = 11.dp, bottom = 13.dp)
             ) {
-                if (disasterLabel != null) {
+                if (animalName != null) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(6.dp)
                     ) {
-                        if (iconResId != 0) {
+                        if (symbolResId != 0) {
                             Box(
                                 modifier = Modifier
                                     .size(22.dp)
@@ -174,15 +164,15 @@ fun TipCard(
                                 contentAlignment = Alignment.Center
                             ) {
                                 Image(
-                                    painter = painterResource(id = iconResId),
-                                    contentDescription = disasterLabel,
+                                    painter = painterResource(id = symbolResId),
+                                    contentDescription = animalName,
                                     modifier = Modifier.size(16.dp),
                                     contentScale = ContentScale.Fit
                                 )
                             }
                         }
                         Text(
-                            text = disasterLabel,
+                            text = animalName,
                             style = MaterialTheme.typography.labelSmall.copy(
                                 fontWeight = FontWeight.Bold,
                                 letterSpacing = 0.3.sp,
@@ -206,7 +196,7 @@ fun TipCard(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    SeverityBadge(severity = tip.severity)
+                    CategoryBadge(category = fact.category, accent = accent)
 
                     Box(
                         modifier = Modifier
@@ -224,8 +214,7 @@ fun TipCard(
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
-                            imageVector = if (isBookmarked) AppIcons.Bookmark
-                            else AppIcons.BookmarkBorder,
+                            imageVector = if (isBookmarked) AppIcons.Bookmark else AppIcons.BookmarkBorder,
                             contentDescription = if (isBookmarked) stringResource(R.string.tip_remove_bookmark)
                             else stringResource(R.string.tip_add_bookmark),
                             tint = if (isBookmarked) accent else TextTertiary,
@@ -242,7 +231,7 @@ fun TipCard(
                 Spacer(modifier = Modifier.height(10.dp))
 
                 Text(
-                    text = tip.title,
+                    text = fact.title,
                     style = MaterialTheme.typography.titleSmall.copy(
                         fontWeight = FontWeight.SemiBold,
                         letterSpacing = (-0.2).sp
@@ -253,7 +242,7 @@ fun TipCard(
                 Spacer(modifier = Modifier.height(6.dp))
 
                 Text(
-                    text = tip.body,
+                    text = fact.body,
                     style = MaterialTheme.typography.bodySmall.copy(
                         lineHeight = 20.sp,
                         letterSpacing = 0.1.sp

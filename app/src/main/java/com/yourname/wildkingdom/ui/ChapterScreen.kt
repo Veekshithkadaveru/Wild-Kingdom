@@ -65,9 +65,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.yourname.wildkingdom.R
-import com.yourname.wildkingdom.data.model.Chapter
-import com.yourname.wildkingdom.data.model.Phase
-import com.yourname.wildkingdom.ui.components.TipCard
+import com.yourname.wildkingdom.data.model.Animal
+import com.yourname.wildkingdom.data.model.Tab
+import com.yourname.wildkingdom.ui.components.FactCard
 import com.yourname.wildkingdom.ui.theme.DarkBackground
 import com.yourname.wildkingdom.ui.theme.DarkBorder
 import com.yourname.wildkingdom.ui.theme.DarkSurfaceHigh
@@ -87,31 +87,32 @@ fun ChapterScreen(
     viewModel: ChapterViewModel = viewModel()
 ) {
     LaunchedEffect(chapterId, highlightTipId) {
-        viewModel.loadChapter(chapterId, highlightTipId)
+        viewModel.loadAnimal(chapterId, highlightTipId)
     }
 
-    val chapter by viewModel.chapter.collectAsState()
-    val activePhase by viewModel.activePhase.collectAsState()
-    val filteredTips by viewModel.filteredTips.collectAsState()
-    val bookmarkedIds by viewModel.bookmarkedTipIds.collectAsState()
-    val currentHighlightId by viewModel.highlightTipId.collectAsState()
+    val animal by viewModel.animal.collectAsState()
+    val activeTabId by viewModel.activeTabId.collectAsState()
+    val tabs by viewModel.tabs.collectAsState()
+    val filteredFacts by viewModel.filteredFacts.collectAsState()
+    val bookmarkedIds by viewModel.bookmarkedFactIds.collectAsState()
+    val currentHighlightId by viewModel.highlightFactId.collectAsState()
 
-    val chapterData = chapter ?: return
+    val animalData = animal ?: return
 
-    val accent = remember(chapterData.accentColor) {
+    val accent = remember(animalData.accentColor) {
         try {
-            Color(AndroidColor.parseColor(chapterData.accentColor))
+            Color(AndroidColor.parseColor(animalData.accentColor))
         } catch (_: IllegalArgumentException) {
-            Color(0xFFE53935)
+            Color(0xFFF9A825)
         }
     }
 
     val context = LocalContext.current
-    val backgroundResId = remember(chapterData.background) {
-        context.resources.getIdentifier(chapterData.background, "drawable", context.packageName)
+    val backgroundResId = remember(animalData.background) {
+        context.resources.getIdentifier(animalData.background, "drawable", context.packageName)
     }
-    val iconResId = remember(chapterData.icon) {
-        context.resources.getIdentifier(chapterData.icon, "drawable", context.packageName)
+    val symbolResId = remember(animalData.symbol) {
+        context.resources.getIdentifier(animalData.symbol, "drawable", context.packageName)
     }
 
     val listState = rememberLazyListState()
@@ -175,11 +176,11 @@ fun ChapterScreen(
                 )
         )
 
-        LaunchedEffect(currentHighlightId, filteredTips) {
-            if (currentHighlightId != null && filteredTips.isNotEmpty()) {
-                val tipIndex = filteredTips.indexOfFirst { it.id == currentHighlightId }
-                if (tipIndex >= 0) {
-                    listState.animateScrollToItem(tipIndex + 4)
+        LaunchedEffect(currentHighlightId, filteredFacts) {
+            if (currentHighlightId != null && filteredFacts.isNotEmpty()) {
+                val factIndex = filteredFacts.indexOfFirst { it.id == currentHighlightId }
+                if (factIndex >= 0) {
+                    listState.animateScrollToItem(factIndex + 4)
                 }
             }
         }
@@ -190,17 +191,17 @@ fun ChapterScreen(
             modifier = Modifier.navigationBarsPadding()
         ) {
             item {
-                ChapterHeader(
-                    chapter = chapterData,
+                AnimalHeader(
+                    animal = animalData,
                     accent = accent,
-                    iconResId = iconResId,
+                    symbolResId = symbolResId,
                     onBackClick = onBackClick
                 )
             }
 
             item {
-                QuickFactCard(
-                    quickFact = chapterData.quickFact,
+                HeroFactCard(
+                    heroFact = animalData.heroFact,
                     accent = accent
                 )
             }
@@ -213,30 +214,31 @@ fun ChapterScreen(
             }
 
             item {
-                PhaseTabs(
-                    activePhase = activePhase,
+                AnimalTabs(
+                    tabs = tabs,
+                    activeTabId = activeTabId,
                     accent = accent,
-                    onPhaseSelected = { viewModel.setActivePhase(it) }
+                    onTabSelected = { viewModel.setActiveTab(it) }
                 )
             }
 
-            itemsIndexed(filteredTips, key = { _, tip -> tip.id }) { index, tip ->
-                val tipOffsetY = remember { Animatable(30f) }
-                val tipAlpha = remember { Animatable(0f) }
+            itemsIndexed(filteredFacts, key = { _, fact -> fact.id }) { index, fact ->
+                val factOffsetY = remember { Animatable(30f) }
+                val factAlpha = remember { Animatable(0f) }
 
-                LaunchedEffect(tip.id, activePhase) {
-                    tipOffsetY.snapTo(30f)
-                    tipAlpha.snapTo(0f)
+                LaunchedEffect(fact.id, activeTabId) {
+                    factOffsetY.snapTo(30f)
+                    factAlpha.snapTo(0f)
                     delay(index * 60L)
                     coroutineScope {
                         launch {
-                            tipOffsetY.animateTo(
+                            factOffsetY.animateTo(
                                 targetValue = 0f,
                                 animationSpec = tween(durationMillis = 300)
                             )
                         }
                         launch {
-                            tipAlpha.animateTo(
+                            factAlpha.animateTo(
                                 targetValue = 1f,
                                 animationSpec = tween(durationMillis = 300)
                             )
@@ -244,8 +246,8 @@ fun ChapterScreen(
                     }
                 }
 
-                val isHighlighted = tip.id == currentHighlightId
-                var highlightShown by remember(tip.id) { mutableStateOf(isHighlighted) }
+                val isHighlighted = fact.id == currentHighlightId
+                var highlightShown by remember(fact.id) { mutableStateOf(isHighlighted) }
 
                 if (isHighlighted) {
                     LaunchedEffect(Unit) {
@@ -264,8 +266,8 @@ fun ChapterScreen(
                 Box(
                     modifier = Modifier
                         .graphicsLayer {
-                            translationY = tipOffsetY.value
-                            alpha = tipAlpha.value
+                            translationY = factOffsetY.value
+                            alpha = factAlpha.value
                         }
                         .then(
                             if (highlightAlpha > 0f) {
@@ -278,11 +280,11 @@ fun ChapterScreen(
                             } else Modifier
                         )
                 ) {
-                    TipCard(
-                        tip = tip,
+                    FactCard(
+                        fact = fact,
                         accent = accent,
-                        isBookmarked = bookmarkedIds.contains(tip.id),
-                        onBookmarkToggle = { viewModel.toggleBookmark(tip) },
+                        isBookmarked = bookmarkedIds.contains(fact.id),
+                        onBookmarkToggle = { viewModel.toggleBookmark(fact) },
                         index = index
                     )
                 }
@@ -292,12 +294,14 @@ fun ChapterScreen(
 }
 
 @Composable
-private fun ChapterHeader(
-    chapter: Chapter,
+private fun AnimalHeader(
+    animal: Animal,
     accent: Color,
-    iconResId: Int,
+    symbolResId: Int,
     onBackClick: () -> Unit
 ) {
+    val totalFacts = animal.tabs.sumOf { it.cards.size }
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -348,7 +352,7 @@ private fun ChapterHeader(
             ) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        text = chapter.title,
+                        text = animal.name,
                         style = MaterialTheme.typography.headlineLarge.copy(
                             fontSize = 38.sp,
                             fontWeight = FontWeight.ExtraBold,
@@ -383,7 +387,7 @@ private fun ChapterHeader(
                     Spacer(modifier = Modifier.height(12.dp))
 
                     Text(
-                        text = chapter.subtitle,
+                        text = animal.subtitle,
                         style = MaterialTheme.typography.bodyMedium.copy(
                             fontWeight = FontWeight.Medium,
                             letterSpacing = 0.3.sp
@@ -400,7 +404,7 @@ private fun ChapterHeader(
                             .padding(horizontal = 10.dp, vertical = 4.dp)
                     ) {
                         Text(
-                            text = stringResource(R.string.chapter_tips_count, chapter.tips.size),
+                            text = stringResource(R.string.chapter_tips_count, totalFacts),
                             style = MaterialTheme.typography.labelSmall.copy(
                                 fontWeight = FontWeight.SemiBold,
                                 letterSpacing = 0.4.sp
@@ -410,7 +414,7 @@ private fun ChapterHeader(
                     }
                 }
 
-                if (iconResId != 0) {
+                if (symbolResId != 0) {
                     val infiniteTransition = rememberInfiniteTransition(label = "symbolRotation")
                     val rotation by infiniteTransition.animateFloat(
                         initialValue = 0f,
@@ -444,8 +448,8 @@ private fun ChapterHeader(
                                 }
                         )
                         Image(
-                            painter = painterResource(id = iconResId),
-                            contentDescription = chapter.title,
+                            painter = painterResource(id = symbolResId),
+                            contentDescription = animal.name,
                             modifier = Modifier
                                 .size(64.dp)
                                 .graphicsLayer { rotationZ = rotation },
@@ -459,7 +463,7 @@ private fun ChapterHeader(
 }
 
 @Composable
-private fun QuickFactCard(quickFact: String, accent: Color) {
+private fun HeroFactCard(heroFact: String, accent: Color) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -536,7 +540,7 @@ private fun QuickFactCard(quickFact: String, accent: Color) {
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
-                    text = quickFact,
+                    text = heroFact,
                     style = MaterialTheme.typography.bodyMedium.copy(
                         lineHeight = 22.sp
                     ),
@@ -582,13 +586,12 @@ private fun SectionLabel(text: String, accent: Color) {
 }
 
 @Composable
-private fun PhaseTabs(
-    activePhase: Phase,
+private fun AnimalTabs(
+    tabs: List<Tab>,
+    activeTabId: String,
     accent: Color,
-    onPhaseSelected: (Phase) -> Unit
+    onTabSelected: (String) -> Unit
 ) {
-    val phases = Phase.entries
-
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -596,8 +599,8 @@ private fun PhaseTabs(
             .padding(top = 12.dp, bottom = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
-        phases.forEach { phase ->
-            val isSelected = phase == activePhase
+        tabs.forEach { tab ->
+            val isSelected = tab.id == activeTabId
 
             Box(
                 modifier = Modifier
@@ -644,13 +647,13 @@ private fun PhaseTabs(
                     .clickable(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = ripple(bounded = true, color = accent.copy(alpha = 0.3f)),
-                        onClick = { onPhaseSelected(phase) }
+                        onClick = { onTabSelected(tab.id) }
                     )
                     .padding(vertical = 12.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = phase.name,
+                    text = tab.label,
                     style = MaterialTheme.typography.labelMedium.copy(
                         fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
                         letterSpacing = 1.6.sp

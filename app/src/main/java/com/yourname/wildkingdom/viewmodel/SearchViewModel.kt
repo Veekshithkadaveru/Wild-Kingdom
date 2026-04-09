@@ -3,8 +3,8 @@ package com.yourname.wildkingdom.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.yourname.wildkingdom.data.GuideRepository
-import com.yourname.wildkingdom.data.model.Tip
+import com.yourname.wildkingdom.data.AnimalRepository
+import com.yourname.wildkingdom.data.model.Fact
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -13,16 +13,16 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 data class SearchResult(
-    val tip: Tip,
-    val chapterTitle: String,
-    val chapterId: String,
+    val fact: Fact,
+    val animalName: String,
+    val animalId: String,
     val accentColor: String,
-    val icon: String
+    val symbol: String
 )
 
 class SearchViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository = GuideRepository(application)
+    private val repository = AnimalRepository(application)
 
     private val _query = MutableStateFlow("")
     val query: StateFlow<String> = _query
@@ -32,17 +32,19 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
 
     init {
         viewModelScope.launch {
-            repository.loadChapters()
-            val chapters = repository.getChapters()
-            allResults = chapters.flatMap { chapter ->
-                chapter.tips.map { tip ->
-                    SearchResult(
-                        tip = tip,
-                        chapterTitle = chapter.title,
-                        chapterId = chapter.id,
-                        accentColor = chapter.accentColor,
-                        icon = chapter.icon
-                    )
+            repository.loadAnimals()
+            val animals = repository.getAnimals()
+            allResults = animals.flatMap { animal ->
+                animal.tabs.flatMap { tab ->
+                    tab.cards.map { fact ->
+                        SearchResult(
+                            fact = fact,
+                            animalName = animal.name,
+                            animalId = animal.id,
+                            accentColor = animal.accentColor,
+                            symbol = animal.symbol
+                        )
+                    }
                 }
             }
             _dataReady.value = true
@@ -54,8 +56,9 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
             if (!ready || q.isBlank()) return@combine emptyList()
             val lower = q.trim().lowercase()
             allResults.filter { result ->
-                result.tip.title.lowercase().contains(lower) ||
-                        result.tip.body.lowercase().contains(lower)
+                result.fact.title.lowercase().contains(lower) ||
+                        result.fact.body.lowercase().contains(lower) ||
+                        result.fact.category.lowercase().contains(lower)
             }
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 

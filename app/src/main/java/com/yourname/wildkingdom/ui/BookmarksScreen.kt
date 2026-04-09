@@ -22,7 +22,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import com.yourname.wildkingdom.ui.components.AppIcons
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -42,7 +41,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.yourname.wildkingdom.R
-import com.yourname.wildkingdom.ui.components.TipCard
+import com.yourname.wildkingdom.ui.components.AppIcons
+import com.yourname.wildkingdom.ui.components.FactCard
 import com.yourname.wildkingdom.ui.theme.DarkBackground
 import com.yourname.wildkingdom.ui.theme.TextSecondary
 import com.yourname.wildkingdom.ui.theme.TextTertiary
@@ -54,8 +54,8 @@ fun BookmarksScreen(
     onBackClick: () -> Unit,
     viewModel: BookmarkViewModel = viewModel()
 ) {
-    val bookmarkedChapters by viewModel.bookmarkedChapters.collectAsState()
-    val totalCount = bookmarkedChapters.sumOf { it.tips.size }
+    val bookmarkedAnimals by viewModel.bookmarkedAnimals.collectAsState()
+    val totalCount = bookmarkedAnimals.sumOf { it.facts.size }
 
     Box(
         modifier = Modifier
@@ -77,25 +77,25 @@ fun BookmarksScreen(
                 )
             }
 
-            bookmarkedChapters.forEach { bookmarkedChapter ->
+            bookmarkedAnimals.forEach { bookmarkedAnimal ->
                 val accent = try {
-                    Color(AndroidColor.parseColor(bookmarkedChapter.accentColor))
+                    Color(AndroidColor.parseColor(bookmarkedAnimal.accentColor))
                 } catch (_: IllegalArgumentException) {
-                    Color(0xFFE53935)
+                    Color(0xFFF9A825)
                 }
 
                 itemsIndexed(
-                    bookmarkedChapter.tips,
-                    key = { _, tip -> "${bookmarkedChapter.id}_${tip.id}" }
-                ) { index, tip ->
-                    TipCard(
-                        tip = tip,
+                    bookmarkedAnimal.facts,
+                    key = { _, fact -> "${bookmarkedAnimal.id}_${fact.id}" }
+                ) { index, fact ->
+                    FactCard(
+                        fact = fact,
                         accent = accent,
                         isBookmarked = true,
-                        onBookmarkToggle = { viewModel.removeBookmark(tip.id) },
+                        onBookmarkToggle = { viewModel.removeBookmark(fact.id) },
                         index = index,
-                        disasterLabel = bookmarkedChapter.title,
-                        disasterIcon = bookmarkedChapter.icon
+                        animalName = bookmarkedAnimal.name,
+                        animalSymbol = bookmarkedAnimal.symbol
                     )
                 }
             }
@@ -173,8 +173,8 @@ private fun BookmarksHeader(
                 .background(
                     Brush.horizontalGradient(
                         colors = listOf(
-                            Color(0xFFE53935),
-                            Color(0xFFE53935).copy(alpha = 0.3f)
+                            Color(0xFFF9A825),
+                            Color(0xFFF9A825).copy(alpha = 0.3f)
                         )
                     )
                 )

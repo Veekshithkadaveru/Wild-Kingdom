@@ -3,87 +3,94 @@ package com.yourname.wildkingdom.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.yourname.wildkingdom.data.GuideRepository
+import com.yourname.wildkingdom.data.AnimalRepository
 import com.yourname.wildkingdom.data.db.AppDatabase
 import com.yourname.wildkingdom.data.db.BookmarkEntity
-import com.yourname.wildkingdom.data.model.Chapter
-import com.yourname.wildkingdom.data.model.Phase
-import com.yourname.wildkingdom.data.model.Tip
+import com.yourname.wildkingdom.data.model.Animal
+import com.yourname.wildkingdom.data.model.Fact
+import com.yourname.wildkingdom.data.model.Tab
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class ChapterViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository = GuideRepository(application)
+    private val repository = AnimalRepository(application)
     private val bookmarkDao = AppDatabase.getInstance(application).bookmarkDao()
 
-    private val _chapterId = MutableStateFlow("")
-    private val _activePhase = MutableStateFlow(Phase.BEFORE)
-    val activePhase: StateFlow<Phase> = _activePhase.asStateFlow()
+    private val _animalId = MutableStateFlow("")
+    private val _activeTabId = MutableStateFlow("FACTS")
+    val activeTabId: StateFlow<String> = _activeTabId.asStateFlow()
 
-    private val _highlightTipId = MutableStateFlow<Int?>(null)
-    val highlightTipId: StateFlow<Int?> = _highlightTipId.asStateFlow()
+    private val _highlightFactId = MutableStateFlow<Int?>(null)
+    val highlightFactId: StateFlow<Int?> = _highlightFactId.asStateFlow()
 
-    private var _chapter: Chapter? = null
-    val chapter: StateFlow<Chapter?> get() = _chapterState
-    private val _chapterState = MutableStateFlow<Chapter?>(null)
+    private var _animalData: Animal? = null
+    val animal: StateFlow<Animal?> get() = _animalState
+    private val _animalState = MutableStateFlow<Animal?>(null)
 
-    val filteredTips: StateFlow<List<Tip>> = combine(
-        _chapterState,
-        _activePhase
-    ) { chapter, phase ->
-        chapter?.tips?.filter { it.phase == phase } ?: emptyList()
+    val tabs: StateFlow<List<Tab>> = _animalState
+        .map { it?.tabs ?: emptyList() }
+        .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
+
+    val filteredFacts: StateFlow<List<Fact>> = combine(
+        _animalState,
+        _activeTabId
+    ) { animal, tabId ->
+        animal?.tabs?.find { it.id == tabId }?.cards ?: emptyList()
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
-    val bookmarkedTipIds: StateFlow<Set<Int>> = bookmarkDao.getBookmarkedIds()
+    val bookmarkedFactIds: StateFlow<Set<Int>> = bookmarkDao.getBookmarkedIds()
         .combine(MutableStateFlow(Unit)) { ids, _ -> ids.toSet() }
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptySet())
 
-    fun loadChapter(chapterId: String, highlightTipId: Int? = null) {
-        _highlightTipId.value = highlightTipId
-        if (_chapterId.value == chapterId && _chapterState.value != null) {
-            if (highlightTipId != null) {
-                val tip = _chapter?.tips?.find { it.id == highlightTipId }
-                if (tip != null) _activePhase.value = tip.phase
+    fun loadAnimal(animalId: String, highlightFactId: Int? = null) {
+        _highlightFactId.value = highlightFactId
+        if (_animalId.value == animalId && _animalState.value != null) {
+            if (highlightFactId != null) {
+                val tabId =
+                    _animalData?.tabs?.find { tab -> tab.cards.any { it.id == highlightFactId } }?.id
+                if (tabId != null) _activeTabId.value = tabId
             }
             return
         }
-        _chapterId.value = chapterId
+        _animalId.value = animalId
         viewModelScope.launch {
-            repository.loadChapters()
-            _chapter = repository.getChapter(chapterId)
-            _chapterState.value = _chapter
-            if (highlightTipId != null) {
-                val tip = _chapter?.tips?.find { it.id == highlightTipId }
-                if (tip != null) _activePhase.value = tip.phase
+            repository.loadAnimals()
+            _animalData = repository.getAnimal(animalId)
+            _animalState.value = _animalData
+            if (highlightFactId != null) {
+                val tabId =
+                    _animalData?.tabs?.find { tab -> tab.cards.any { it.id == highlightFactId } }?.id
+                if (tabId != null) _activeTabId.value = tabId
             }
         }
     }
 
     fun clearHighlight() {
-        _highlightTipId.value = null
+        _highlightFactId.value = null
     }
 
-    fun setActivePhase(phase: Phase) {
-        _activePhase.value = phase
+    fun setActiveTab(tabId: String) {
+        _activeTabId.value = tabId
     }
 
-    fun toggleBookmark(tip: Tip) {
+    fun toggleBookmark(fact: Fact) {
         viewModelScope.launch {
-            val chapterId = _chapterId.value
-            if (bookmarkedTipIds.value.contains(tip.id)) {
-                bookmarkDao.removeBookmark(tip.id)
+            val animalId = _animalId.value
+            if (bookmarkedFactIds.value.contains(fact.id)) {
+                bookmarkDao.removeBookmark(fact.id)
             } else {
                 bookmarkDao.addBookmark(
                     BookmarkEntity(
-                        tipId = tip.id,
-                        chapterId = chapterId,
-                        tipTitle = tip.title
+                        tipId = fact.id,
+                        chapterId = animalId,
+                        tipTitle = fact.title
                     )
                 )
             }

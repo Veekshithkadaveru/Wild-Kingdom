@@ -30,7 +30,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
-import com.yourname.wildkingdom.ui.components.AppIcons
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -58,7 +57,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.yourname.wildkingdom.R
-import com.yourname.wildkingdom.data.model.Chapter
+import com.yourname.wildkingdom.data.model.Animal
+import com.yourname.wildkingdom.ui.components.AppIcons
 import com.yourname.wildkingdom.ui.theme.DarkBackground
 import com.yourname.wildkingdom.ui.theme.DarkBorder
 import com.yourname.wildkingdom.ui.theme.TextPrimary
@@ -77,7 +77,7 @@ fun HomeScreen(
     onBookmarksClick: () -> Unit,
     viewModel: HomeViewModel = viewModel()
 ) {
-    val chapters by viewModel.chapters.collectAsState()
+    val animals by viewModel.animals.collectAsState()
 
     Box(
         modifier = Modifier
@@ -108,11 +108,11 @@ fun HomeScreen(
                 SectionLabel()
             }
 
-            itemsIndexed(chapters, key = { _, chapter -> chapter.id }) { index, chapter ->
-                ChapterCard(
-                    chapter = chapter,
+            itemsIndexed(animals, key = { _, animal -> animal.id }) { index, animal ->
+                AnimalCard(
+                    animal = animal,
                     index = index,
-                    onClick = { onChapterClick(chapter.id) }
+                    onClick = { onChapterClick(animal.id) }
                 )
             }
         }
@@ -171,8 +171,8 @@ private fun HomeHeader(
                             letterSpacing = (-1.2).sp,
                             brush = Brush.horizontalGradient(
                                 colors = listOf(
-                                    Color(0xFFE53935),
-                                    Color(0xFFFF7043)
+                                    Color(0xFFF9A825),
+                                    Color(0xFF558B2F)
                                 )
                             )
                         )
@@ -186,8 +186,8 @@ private fun HomeHeader(
                             .background(
                                 Brush.horizontalGradient(
                                     colors = listOf(
-                                        Color(0xFFE53935),
-                                        Color(0xFFFF7043).copy(alpha = 0.4f)
+                                        Color(0xFFF9A825),
+                                        Color(0xFFF9A825).copy(alpha = 0.4f)
                                     )
                                 )
                             )
@@ -209,7 +209,7 @@ private fun HomeHeader(
                                 fontWeight = FontWeight.SemiBold,
                                 letterSpacing = 0.3.sp
                             ),
-                            color = Color(0xFFE53935).copy(alpha = 0.85f)
+                            color = Color(0xFFF9A825).copy(alpha = 0.85f)
                         )
                     }
                 }
@@ -273,7 +273,7 @@ private fun SectionLabel() {
                 .width(3.dp)
                 .height(14.dp)
                 .clip(RoundedCornerShape(2.dp))
-                .background(Color(0xFFE53935))
+                .background(Color(0xFFF9A825))
         )
         Spacer(modifier = Modifier.width(10.dp))
         Text(
@@ -295,7 +295,7 @@ private fun SectionLabel() {
 }
 
 @Composable
-private fun ChapterCard(chapter: Chapter, index: Int, onClick: () -> Unit) {
+private fun AnimalCard(animal: Animal, index: Int, onClick: () -> Unit) {
     val offsetY = remember { Animatable(40f) }
     val cardAlpha = remember { Animatable(0f) }
     val accentProgress = remember { Animatable(0f) }
@@ -327,21 +327,23 @@ private fun ChapterCard(chapter: Chapter, index: Int, onClick: () -> Unit) {
         }
     }
 
-    val accent = remember(chapter.accentColor) {
+    val accent = remember(animal.accentColor) {
         try {
-            Color(AndroidColor.parseColor(chapter.accentColor))
+            Color(AndroidColor.parseColor(animal.accentColor))
         } catch (_: IllegalArgumentException) {
-            Color(0xFFE53935)
+            Color(0xFFF9A825)
         }
     }
 
     val context = LocalContext.current
-    val iconResId = remember(chapter.icon) {
-        context.resources.getIdentifier(chapter.icon, "drawable", context.packageName)
+    val symbolResId = remember(animal.symbol) {
+        context.resources.getIdentifier(animal.symbol, "drawable", context.packageName)
     }
-    val backgroundResId = remember(chapter.background) {
-        context.resources.getIdentifier(chapter.background, "drawable", context.packageName)
+    val backgroundResId = remember(animal.background) {
+        context.resources.getIdentifier(animal.background, "drawable", context.packageName)
     }
+
+    val totalFacts = animal.tabs.sumOf { it.cards.size }
 
     Box(
         modifier = Modifier
@@ -361,9 +363,11 @@ private fun ChapterCard(chapter: Chapter, index: Int, onClick: () -> Unit) {
                 onClick = onClick
             )
     ) {
-        Box(modifier = Modifier
-            .matchParentSize()
-            .background(Color(0xFF111620)))
+        Box(
+            modifier = Modifier
+                .matchParentSize()
+                .background(Color(0xFF111620))
+        )
 
         if (backgroundResId != 0) {
             Image(
@@ -453,13 +457,13 @@ private fun ChapterCard(chapter: Chapter, index: Int, onClick: () -> Unit) {
             ) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        text = chapter.title,
+                        text = animal.name,
                         style = MaterialTheme.typography.titleMedium,
                         color = TextPrimary
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
-                        text = chapter.subtitle,
+                        text = animal.subtitle,
                         style = MaterialTheme.typography.bodySmall,
                         color = TextSecondary
                     )
@@ -471,7 +475,7 @@ private fun ChapterCard(chapter: Chapter, index: Int, onClick: () -> Unit) {
                             .padding(horizontal = 10.dp, vertical = 4.dp)
                     ) {
                         Text(
-                            text = stringResource(R.string.home_tips_count, chapter.tips.size),
+                            text = stringResource(R.string.home_tips_count, totalFacts),
                             style = MaterialTheme.typography.labelSmall.copy(
                                 fontWeight = FontWeight.SemiBold,
                                 letterSpacing = 0.4.sp
@@ -481,15 +485,15 @@ private fun ChapterCard(chapter: Chapter, index: Int, onClick: () -> Unit) {
                     }
                 }
 
-                if (iconResId != 0) {
+                if (symbolResId != 0) {
                     Spacer(modifier = Modifier.width(8.dp))
                     Box(
                         modifier = Modifier.size(68.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Image(
-                            painter = painterResource(id = iconResId),
-                            contentDescription = chapter.title,
+                            painter = painterResource(id = symbolResId),
+                            contentDescription = animal.name,
                             modifier = Modifier.size(56.dp),
                             contentScale = ContentScale.Fit,
                             alpha = 1f

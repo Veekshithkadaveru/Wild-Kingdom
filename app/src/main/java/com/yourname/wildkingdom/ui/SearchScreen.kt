@@ -70,8 +70,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.yourname.wildkingdom.R
-import com.yourname.wildkingdom.ui.components.SeverityBadge
-import com.yourname.wildkingdom.ui.components.severityColor
+import com.yourname.wildkingdom.ui.components.CategoryBadge
 import com.yourname.wildkingdom.ui.theme.DarkBackground
 import com.yourname.wildkingdom.ui.theme.DarkBorder
 import com.yourname.wildkingdom.ui.theme.TextPrimary
@@ -113,13 +112,11 @@ fun SearchScreen(
                 )
             }
 
-
             if (query.isNotBlank() && results.isEmpty()) {
                 item {
                     EmptySearchState(query = query)
                 }
             }
-
 
             if (query.isNotBlank() && results.isNotEmpty()) {
                 item {
@@ -127,7 +124,7 @@ fun SearchScreen(
                 }
             }
 
-            itemsIndexed(results, key = { _, r -> r.tip.id }) { index, result ->
+            itemsIndexed(results, key = { _, r -> r.fact.id }) { index, result ->
                 AnimatedVisibility(
                     visible = true,
                     enter = fadeIn(tween(200)) +
@@ -139,14 +136,13 @@ fun SearchScreen(
                     SearchResultCard(
                         result = result,
                         query = query,
-                        onClick = { onResultClick(result.chapterId, result.tip.id) }
+                        onClick = { onResultClick(result.animalId, result.fact.id) }
                     )
                 }
             }
         }
     }
 }
-
 
 @Composable
 private fun SearchHeader(
@@ -215,8 +211,8 @@ private fun SearchHeader(
                 .background(
                     Brush.horizontalGradient(
                         colors = listOf(
-                            Color(0xFFE53935),
-                            Color(0xFFE53935).copy(alpha = 0.3f)
+                            Color(0xFFF9A825),
+                            Color(0xFFF9A825).copy(alpha = 0.3f)
                         )
                     )
                 )
@@ -245,7 +241,7 @@ private fun SearchField(
         animationSpec = tween(300),
         label = "glow"
     )
-    val accentRed = Color(0xFFE53935)
+    val accentGold = Color(0xFFF9A825)
 
     Box(
         modifier = Modifier
@@ -256,8 +252,8 @@ private fun SearchField(
                     drawRoundRect(
                         brush = Brush.horizontalGradient(
                             colors = listOf(
-                                accentRed.copy(alpha = 0.10f * glowAlpha),
-                                accentRed.copy(alpha = 0.03f * glowAlpha)
+                                accentGold.copy(alpha = 0.10f * glowAlpha),
+                                accentGold.copy(alpha = 0.03f * glowAlpha)
                             )
                         ),
                         cornerRadius = CornerRadius(14.dp.toPx())
@@ -268,7 +264,7 @@ private fun SearchField(
                     cornerRadius = CornerRadius(14.dp.toPx())
                 )
                 val borderColor = if (glowAlpha > 0.5f)
-                    accentRed.copy(alpha = 0.30f)
+                    accentGold.copy(alpha = 0.30f)
                 else
                     DarkBorder.copy(alpha = 0.6f)
                 drawRoundRect(
@@ -286,7 +282,7 @@ private fun SearchField(
             Icon(
                 imageVector = Icons.Filled.Search,
                 contentDescription = null,
-                tint = if (isFocused) accentRed.copy(alpha = 0.7f) else TextTertiary,
+                tint = if (isFocused) accentGold.copy(alpha = 0.7f) else TextTertiary,
                 modifier = Modifier.size(20.dp)
             )
 
@@ -299,7 +295,7 @@ private fun SearchField(
                     color = TextPrimary,
                     fontWeight = FontWeight.Medium
                 ),
-                cursorBrush = SolidColor(accentRed),
+                cursorBrush = SolidColor(accentGold),
                 modifier = Modifier
                     .weight(1f)
                     .padding(horizontal = 12.dp)
@@ -349,7 +345,6 @@ private fun SearchField(
     }
 }
 
-
 @Composable
 private fun ResultCountBar(count: Int) {
     Row(
@@ -368,7 +363,6 @@ private fun ResultCountBar(count: Int) {
         )
     }
 }
-
 
 @Composable
 private fun EmptySearchState(query: String) {
@@ -421,7 +415,6 @@ private fun EmptySearchState(query: String) {
     }
 }
 
-
 @Composable
 private fun SearchResultCard(
     result: SearchResult,
@@ -431,12 +424,11 @@ private fun SearchResultCard(
     val accent = try {
         Color(AndroidColor.parseColor(result.accentColor))
     } catch (_: IllegalArgumentException) {
-        Color(0xFFE53935)
+        Color(0xFFF9A825)
     }
-    val sevColor = severityColor(result.tip.severity)
     val context = LocalContext.current
-    val iconResId = remember(result.icon) {
-        context.resources.getIdentifier(result.icon, "drawable", context.packageName)
+    val symbolResId = remember(result.symbol) {
+        context.resources.getIdentifier(result.symbol, "drawable", context.packageName)
     }
 
     Box(
@@ -499,11 +491,7 @@ private fun SearchResultCard(
                     .fillMaxHeight()
                     .padding(vertical = 10.dp)
                     .clip(RoundedCornerShape(2.dp))
-                    .background(
-                        Brush.verticalGradient(
-                            colors = listOf(accent, sevColor)
-                        )
-                    )
+                    .background(accent)
             )
 
             Column(
@@ -520,7 +508,7 @@ private fun SearchResultCard(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.spacedBy(6.dp)
                     ) {
-                        if (iconResId != 0) {
+                        if (symbolResId != 0) {
                             Box(
                                 modifier = Modifier
                                     .size(20.dp)
@@ -538,15 +526,15 @@ private fun SearchResultCard(
                                 contentAlignment = Alignment.Center
                             ) {
                                 Image(
-                                    painter = painterResource(id = iconResId),
-                                    contentDescription = result.chapterTitle,
+                                    painter = painterResource(id = symbolResId),
+                                    contentDescription = result.animalName,
                                     modifier = Modifier.size(14.dp),
                                     contentScale = ContentScale.Fit
                                 )
                             }
                         }
                         Text(
-                            text = result.chapterTitle,
+                            text = result.animalName,
                             style = MaterialTheme.typography.labelSmall.copy(
                                 fontWeight = FontWeight.Bold,
                                 letterSpacing = 0.3.sp,
@@ -563,7 +551,7 @@ private fun SearchResultCard(
                             .padding(horizontal = 7.dp, vertical = 2.dp)
                     ) {
                         Text(
-                            text = result.tip.phase.name,
+                            text = result.fact.category,
                             style = MaterialTheme.typography.labelSmall.copy(
                                 fontWeight = FontWeight.SemiBold,
                                 letterSpacing = 0.6.sp,
@@ -589,17 +577,12 @@ private fun SearchResultCard(
                         )
                 )
 
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(8.dp)
-                ) {
-                    SeverityBadge(severity = result.tip.severity)
-                }
+                CategoryBadge(category = result.fact.category, accent = accent)
 
                 Spacer(modifier = Modifier.height(8.dp))
 
                 HighlightedText(
-                    text = result.tip.title,
+                    text = result.fact.title,
                     highlight = query,
                     accentColor = accent,
                     style = MaterialTheme.typography.titleSmall.copy(
@@ -612,7 +595,7 @@ private fun SearchResultCard(
                 Spacer(modifier = Modifier.height(5.dp))
 
                 HighlightedText(
-                    text = result.tip.body,
+                    text = result.fact.body,
                     highlight = query,
                     accentColor = accent,
                     style = MaterialTheme.typography.bodySmall.copy(
@@ -626,7 +609,6 @@ private fun SearchResultCard(
         }
     }
 }
-
 
 @Composable
 private fun HighlightedText(

@@ -3,13 +3,13 @@ package com.yourname.wildkingdom.data.model
 import androidx.annotation.Keep
 
 @Keep
-data class Chapter(
+data class Animal(
     val id: String,
-    val title: String,
+    val name: String,
     val subtitle: String,
-    val icon: String,
+    val symbol: String,
     val background: String,
     val accentColor: String,
-    val quickFact: String,
-    val tips: List<Tip>
+    val heroFact: String,
+    val tabs: List<Tab>
 )
