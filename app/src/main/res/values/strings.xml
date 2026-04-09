@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">Wild Kingdom</string>
-
-    <!-- Home Screen -->
     <string name="home_title_disaster">Wild</string>
     <string name="home_title_ready">Kingdom.</string>
     <string name="home_subtitle_know">Discover</string>
@@ -10,14 +8,10 @@
     <string name="home_search">Search</string>
     <string name="home_bookmarks">Bookmarks</string>
     <string name="home_tips_count">%d facts</string>
-
-    <!-- Chapter Screen -->
     <string name="chapter_back">Back</string>
     <string name="chapter_quick_fact">HERO FACT</string>
     <string name="chapter_section_survival_tips">FACTS</string>
     <string name="chapter_tips_count">%d facts</string>
-
-    <!-- Bookmarks Screen -->
     <string name="bookmarks_title">Saved Facts</string>
     <string name="bookmarks_no_tips_saved">No facts saved yet</string>
     <string name="bookmarks_saved_tips_plural">%d saved facts</string>
@@ -25,8 +19,6 @@
     <string name="bookmarks_empty_title">No saved facts yet</string>
     <string name="bookmarks_empty_subtitle">Bookmark facts from any animal</string>
     <string name="bookmarks_back">Back</string>
-
-    <!-- Search Screen -->
     <string name="search_title">Search</string>
     <string name="search_subtitle">Find facts across all animals</string>
     <string name="search_placeholder">Search facts, animals\u2026</string>
@@ -38,11 +30,7 @@
         <item quantity="one">%d result found</item>
         <item quantity="other">%d results found</item>
     </plurals>
-
-    <!-- Tip Card -->
     <string name="tip_remove_bookmark">Remove bookmark</string>
     <string name="tip_add_bookmark">Add bookmark</string>
-
-    <!-- Splash Screen -->
     <string name="splash_logo_description">Wild Kingdom</string>
 </resources>

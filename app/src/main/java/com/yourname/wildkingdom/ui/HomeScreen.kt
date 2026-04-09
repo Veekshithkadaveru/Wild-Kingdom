@@ -45,8 +45,10 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -85,7 +87,7 @@ fun HomeScreen(
             .background(DarkBackground)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.home_background),
+            painter = painterResource(id = R.drawable.home_background_anime),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
@@ -344,6 +346,13 @@ private fun AnimalCard(animal: Animal, index: Int, onClick: () -> Unit) {
     }
 
     val totalFacts = animal.tabs.sumOf { it.cards.size }
+    val cardTextShadow = remember {
+        Shadow(
+            color = Color.Black.copy(alpha = 0.55f),
+            offset = Offset(0f, 2f),
+            blurRadius = 10f
+        )
+    }
 
     Box(
         modifier = Modifier
@@ -376,7 +385,7 @@ private fun AnimalCard(animal: Animal, index: Int, onClick: () -> Unit) {
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .matchParentSize()
-                    .alpha(0.7f)
+                    .alpha(0.62f)
             )
         }
 
@@ -388,11 +397,12 @@ private fun AnimalCard(animal: Animal, index: Int, onClick: () -> Unit) {
                         brush = Brush.horizontalGradient(
                             colors = listOf(
                                 Color(0xFF111620),
-                                Color(0xFF111620).copy(alpha = 0.7f),
+                                Color(0xFF111620).copy(alpha = 0.82f),
+                                Color(0xFF111620).copy(alpha = 0.18f),
                                 Color.Transparent
                             ),
                             startX = 0f,
-                            endX = size.width * 0.85f
+                            endX = size.width * 0.9f
                         ),
                         cornerRadius = CornerRadius(16.dp.toPx())
                     )
@@ -458,16 +468,32 @@ private fun AnimalCard(animal: Animal, index: Int, onClick: () -> Unit) {
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = animal.name,
-                        style = MaterialTheme.typography.titleMedium,
+                        style = MaterialTheme.typography.titleMedium.copy(
+                            shadow = cardTextShadow
+                        ),
                         color = TextPrimary
                     )
                     Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = animal.subtitle,
-                        style = MaterialTheme.typography.bodySmall,
-                        color = TextSecondary
+                        style = MaterialTheme.typography.bodySmall.copy(
+                            shadow = cardTextShadow
+                        ),
+                        color = TextPrimary.copy(alpha = 0.76f)
                     )
-                    Spacer(modifier = Modifier.height(12.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = animal.heroFact,
+                        style = MaterialTheme.typography.bodySmall.copy(
+                            lineHeight = 18.sp,
+                            letterSpacing = 0.1.sp,
+                            shadow = cardTextShadow
+                        ),
+                        color = TextSecondary.copy(alpha = 0.98f),
+                        maxLines = 2,
+                        overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis
+                    )
+                    Spacer(modifier = Modifier.height(10.dp))
                     Box(
                         modifier = Modifier
                             .clip(RoundedCornerShape(6.dp))

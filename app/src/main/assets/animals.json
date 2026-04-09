@@ -4,8 +4,8 @@
       "id": "TIGER",
       "name": "Tiger",
       "subtitle": "Panthera tigris",
-      "symbol": "tiger_sym_1",
-      "background": "tiger_back_1",
+      "symbol": "tiger_sym_7",
+      "background": "tiger_back_2",
       "accentColor": "#FF6F00",
       "heroFact": "The tiger is the largest wild cat on Earth and the apex predator of the Asian jungle.",
       "tabs": [
@@ -346,8 +346,8 @@
       "id": "SNAKE",
       "name": "Snake",
       "subtitle": "Serpentes",
-      "symbol": "tiger_sym_7",
-      "background": "tiger_back_2",
+      "symbol": "tiger_sym_1",
+      "background": "tiger_back_1",
       "accentColor": "#2E7D32",
       "heroFact": "Snakes are found on every continent except Antarctica and have evolved into over 3,700 species occupying almost every habitat on Earth.",
       "tabs": [

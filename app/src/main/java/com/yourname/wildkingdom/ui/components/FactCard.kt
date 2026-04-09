@@ -200,7 +200,7 @@ fun FactCard(
 
                     Box(
                         modifier = Modifier
-                            .size(29.dp)
+                            .size(35.dp)
                             .clip(CircleShape)
                             .background(
                                 if (isBookmarked) accent.copy(alpha = 0.12f)
@@ -208,7 +208,7 @@ fun FactCard(
                             )
                             .clickable(
                                 interactionSource = remember { MutableInteractionSource() },
-                                indication = ripple(bounded = true, radius = 14.dp),
+                                indication = ripple(bounded = true, radius = 17.dp),
                                 onClick = onBookmarkToggle
                             ),
                         contentAlignment = Alignment.Center
@@ -219,7 +219,7 @@ fun FactCard(
                             else stringResource(R.string.tip_add_bookmark),
                             tint = if (isBookmarked) accent else TextTertiary,
                             modifier = Modifier
-                                .size(14.dp)
+                                .size(17.dp)
                                 .graphicsLayer {
                                     scaleX = pulseScale
                                     scaleY = pulseScale

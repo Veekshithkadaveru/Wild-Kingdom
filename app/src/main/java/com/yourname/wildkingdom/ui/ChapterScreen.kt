@@ -301,6 +301,46 @@ private fun AnimalHeader(
     onBackClick: () -> Unit
 ) {
     val totalFacts = animal.tabs.sumOf { it.cards.size }
+    val titleOffsetY = remember { Animatable(28f) }
+    val titleAlpha = remember { Animatable(0f) }
+    val subtitleOffsetY = remember { Animatable(16f) }
+    val subtitleAlpha = remember { Animatable(0f) }
+
+    LaunchedEffect(animal.id) {
+        titleOffsetY.snapTo(28f)
+        titleAlpha.snapTo(0f)
+        subtitleOffsetY.snapTo(16f)
+        subtitleAlpha.snapTo(0f)
+        coroutineScope {
+            launch {
+                titleOffsetY.animateTo(
+                    targetValue = 0f,
+                    animationSpec = tween(durationMillis = 500)
+                )
+            }
+            launch {
+                titleAlpha.animateTo(
+                    targetValue = 1f,
+                    animationSpec = tween(durationMillis = 450)
+                )
+            }
+        }
+        delay(90L)
+        coroutineScope {
+            launch {
+                subtitleOffsetY.animateTo(
+                    targetValue = 0f,
+                    animationSpec = tween(durationMillis = 420)
+                )
+            }
+            launch {
+                subtitleAlpha.animateTo(
+                    targetValue = 1f,
+                    animationSpec = tween(durationMillis = 380)
+                )
+            }
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -353,6 +393,10 @@ private fun AnimalHeader(
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
                         text = animal.name,
+                        modifier = Modifier.graphicsLayer {
+                            translationY = titleOffsetY.value
+                            alpha = titleAlpha.value
+                        },
                         style = MaterialTheme.typography.headlineLarge.copy(
                             fontSize = 38.sp,
                             fontWeight = FontWeight.ExtraBold,
@@ -388,6 +432,10 @@ private fun AnimalHeader(
 
                     Text(
                         text = animal.subtitle,
+                        modifier = Modifier.graphicsLayer {
+                            translationY = subtitleOffsetY.value
+                            alpha = subtitleAlpha.value
+                        },
                         style = MaterialTheme.typography.bodyMedium.copy(
                             fontWeight = FontWeight.Medium,
                             letterSpacing = 0.3.sp
@@ -418,23 +466,23 @@ private fun AnimalHeader(
                     val infiniteTransition = rememberInfiniteTransition(label = "symbolRotation")
                     val rotation by infiniteTransition.animateFloat(
                         initialValue = 0f,
-                        targetValue = 360f,
+                        targetValue = 90f,
                         animationSpec = infiniteRepeatable(
                             animation = tween(durationMillis = 20000, easing = LinearEasing),
-                            repeatMode = RepeatMode.Restart
+                            repeatMode = RepeatMode.Reverse
                         ),
                         label = "rotation"
                     )
 
                     Box(
                         modifier = Modifier
-                            .size(80.dp)
+                            .size(112.dp)
                             .padding(top = 4.dp),
                         contentAlignment = Alignment.Center
                     ) {
                         Box(
                             modifier = Modifier
-                                .size(80.dp)
+                                .size(112.dp)
                                 .drawBehind {
                                     drawCircle(
                                         brush = Brush.radialGradient(
@@ -451,7 +499,7 @@ private fun AnimalHeader(
                             painter = painterResource(id = symbolResId),
                             contentDescription = animal.name,
                             modifier = Modifier
-                                .size(64.dp)
+                                .size(90.dp)
                                 .graphicsLayer { rotationZ = rotation },
                             contentScale = ContentScale.Fit
                         )

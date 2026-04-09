@@ -53,18 +53,14 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
 
-    // Navigation
     implementation(libs.androidx.navigation.compose)
 
-    // Room
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
 
-    // Gson
     implementation(libs.gson)
 
-    // Coroutines
     implementation(libs.kotlinx.coroutines.android)
 
     testImplementation(libs.junit)
