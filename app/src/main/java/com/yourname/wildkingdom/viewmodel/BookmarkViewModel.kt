@@ -1,6 +1,7 @@
 package com.yourname.wildkingdom.viewmodel
 
 import android.app.Application
+import androidx.annotation.Keep
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.yourname.wildkingdom.data.AnimalRepository
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
+@Keep
 data class BookmarkedAnimal(
     val id: String,
     val name: String,
@@ -24,7 +26,7 @@ data class BookmarkedAnimal(
 
 class BookmarkViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository = AnimalRepository(application)
+    private val repository = AnimalRepository.getInstance(application)
     private val bookmarkDao = AppDatabase.getInstance(application).bookmarkDao()
 
     private var animalsById: Map<String, Animal> = emptyMap()

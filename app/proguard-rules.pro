@@ -14,11 +14,11 @@
 
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+-keepattributes SourceFile,LineNumberTable
 
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
-#-renamesourcefileattribute SourceFile
+-renamesourcefileattribute SourceFile
 
 # --- Gson ---
 -keepattributes Signature
@@ -33,6 +33,7 @@
     @com.google.gson.annotations.SerializedName <fields>;
 }
 -keep class com.yourname.wildkingdom.data.model.** { <fields>; <init>(...); }
+-keep class com.yourname.wildkingdom.data.AnimalsJson { *; }
 -keepclassmembers enum com.yourname.wildkingdom.data.model.** {
     public static **[] values();
     public static ** valueOf(java.lang.String);

@@ -17,11 +17,22 @@ internal data class AnimalsJson(
     @SerializedName("animals") val animals: List<Animal>
 )
 
-class AnimalRepository(private val context: Context) {
+class AnimalRepository private constructor(private val context: Context) {
 
     private var _animals: List<Animal> = emptyList()
     private val mutex = Mutex()
     private var loaded = false
+
+    companion object {
+        @Volatile
+        private var INSTANCE: AnimalRepository? = null
+
+        fun getInstance(context: Context): AnimalRepository {
+            return INSTANCE ?: synchronized(this) {
+                INSTANCE ?: AnimalRepository(context.applicationContext).also { INSTANCE = it }
+            }
+        }
+    }
 
     suspend fun loadAnimals(): List<Animal> {
         if (loaded) return _animals

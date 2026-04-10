@@ -1,17 +1,21 @@
 package com.yourname.wildkingdom.viewmodel
 
 import android.app.Application
+import androidx.annotation.Keep
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.yourname.wildkingdom.data.AnimalRepository
 import com.yourname.wildkingdom.data.model.Fact
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
+@Keep
 data class SearchResult(
     val fact: Fact,
     val animalName: String,
@@ -22,7 +26,7 @@ data class SearchResult(
 
 class SearchViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository = AnimalRepository(application)
+    private val repository = AnimalRepository.getInstance(application)
 
     private val _query = MutableStateFlow("")
     val query: StateFlow<String> = _query
@@ -51,8 +55,9 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
         }
     }
 
+    @OptIn(FlowPreview::class)
     val results: StateFlow<List<SearchResult>> =
-        combine(_query, _dataReady) { q, ready ->
+        combine(_query.debounce(250), _dataReady) { q, ready ->
             if (!ready || q.isBlank()) return@combine emptyList()
             val trimmed = q.trim()
             allResults.filter { result ->

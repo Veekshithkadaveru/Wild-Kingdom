@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository = AnimalRepository(application)
+    private val repository = AnimalRepository.getInstance(application)
 
     private val _animals = MutableStateFlow<List<Animal>>(emptyList())
     val animals: StateFlow<List<Animal>> = _animals.asStateFlow()

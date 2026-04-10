@@ -66,40 +66,46 @@ fun BookmarksScreen(
             .background(DarkBackground)
     ) {
         if (totalCount == 0) {
-            EmptyBookmarksState()
-        }
-
-        LazyColumn(
-            contentPadding = PaddingValues(bottom = 40.dp),
-            modifier = Modifier.navigationBarsPadding()
-        ) {
-            item(key = "header") {
+            Column(modifier = Modifier.fillMaxSize()) {
                 BookmarksHeader(
                     totalCount = totalCount,
                     onBackClick = onBackClick
                 )
+                EmptyBookmarksState()
             }
-
-            bookmarkedAnimals.forEach { bookmarkedAnimal ->
-                val accent = try {
-                    Color(AndroidColor.parseColor(bookmarkedAnimal.accentColor))
-                } catch (_: IllegalArgumentException) {
-                    Color(0xFFF9A825)
+        } else {
+            LazyColumn(
+                contentPadding = PaddingValues(bottom = 40.dp),
+                modifier = Modifier.navigationBarsPadding()
+            ) {
+                item(key = "header") {
+                    BookmarksHeader(
+                        totalCount = totalCount,
+                        onBackClick = onBackClick
+                    )
                 }
 
-                itemsIndexed(
-                    bookmarkedAnimal.facts,
-                    key = { _, fact -> "${bookmarkedAnimal.id}_${fact.id}" }
-                ) { index, fact ->
-                    FactCard(
-                        fact = fact,
-                        accent = accent,
-                        isBookmarked = true,
-                        onBookmarkToggle = { viewModel.removeBookmark(fact.id) },
-                        index = index,
-                        animalName = bookmarkedAnimal.name,
-                        animalSymbol = bookmarkedAnimal.symbol
-                    )
+                bookmarkedAnimals.forEach { bookmarkedAnimal ->
+                    val accent = try {
+                        Color(AndroidColor.parseColor(bookmarkedAnimal.accentColor))
+                    } catch (_: IllegalArgumentException) {
+                        Color(0xFFF9A825)
+                    }
+
+                    itemsIndexed(
+                        bookmarkedAnimal.facts,
+                        key = { _, fact -> "${bookmarkedAnimal.id}_${fact.id}" }
+                    ) { index, fact ->
+                        FactCard(
+                            fact = fact,
+                            accent = accent,
+                            isBookmarked = true,
+                            onBookmarkToggle = { viewModel.removeBookmark(fact.id) },
+                            index = index,
+                            animalName = bookmarkedAnimal.name,
+                            animalSymbol = bookmarkedAnimal.symbol
+                        )
+                    }
                 }
             }
         }

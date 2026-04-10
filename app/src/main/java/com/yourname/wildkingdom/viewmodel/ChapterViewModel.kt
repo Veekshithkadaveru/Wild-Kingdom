@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 
 class ChapterViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val repository = AnimalRepository(application)
+    private val repository = AnimalRepository.getInstance(application)
     private val bookmarkDao = AppDatabase.getInstance(application).bookmarkDao()
 
     private val _animalId = MutableStateFlow("")

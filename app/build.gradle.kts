@@ -10,7 +10,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.yourname.wildkingdom"
+        applicationId = "com.veekshith.wildkingdom"
         minSdk = 26
         targetSdk = 36
         versionCode = 1

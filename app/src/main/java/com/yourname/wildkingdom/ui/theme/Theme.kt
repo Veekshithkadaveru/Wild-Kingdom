@@ -30,8 +30,8 @@ fun WildKingdomTheme(
     val view = LocalView.current
     if (!view.isInEditMode) {
         SideEffect {
-            val window = (view.context as Activity).window
-            WindowCompat.getInsetsController(window, view).apply {
+            val activity = view.context as? Activity ?: return@SideEffect
+            WindowCompat.getInsetsController(activity.window, view).apply {
                 isAppearanceLightStatusBars = false
                 isAppearanceLightNavigationBars = false
             }

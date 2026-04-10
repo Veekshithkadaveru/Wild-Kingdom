@@ -138,7 +138,7 @@ fun SplashScreen(onSplashFinished: () -> Unit) {
             tween(600, easing = EaseOutCubic)
         ) { glowAlpha = value }
 
-        delay(1500)
+        delay(400)
         onSplashFinished()
     }
 
