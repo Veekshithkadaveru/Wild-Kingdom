@@ -54,11 +54,11 @@ class SearchViewModel(application: Application) : AndroidViewModel(application) 
     val results: StateFlow<List<SearchResult>> =
         combine(_query, _dataReady) { q, ready ->
             if (!ready || q.isBlank()) return@combine emptyList()
-            val lower = q.trim().lowercase()
+            val trimmed = q.trim()
             allResults.filter { result ->
-                result.fact.title.lowercase().contains(lower) ||
-                        result.fact.body.lowercase().contains(lower) ||
-                        result.fact.category.lowercase().contains(lower)
+                result.fact.title.contains(trimmed, ignoreCase = true) ||
+                        result.fact.body.contains(trimmed, ignoreCase = true) ||
+                        result.fact.category.contains(trimmed, ignoreCase = true)
             }
         }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 

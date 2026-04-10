@@ -35,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
@@ -48,6 +49,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.yourname.wildkingdom.R
 import com.yourname.wildkingdom.data.model.Fact
+import com.yourname.wildkingdom.ui.components.bounceClick
 import com.yourname.wildkingdom.ui.theme.DarkBorder
 import com.yourname.wildkingdom.ui.theme.TextPrimary
 import com.yourname.wildkingdom.ui.theme.TextSecondary
@@ -74,13 +76,13 @@ fun FactCard(
     var previousBookmarked by remember { mutableStateOf(isBookmarked) }
     val pulseScale by animateFloatAsState(
         targetValue = pulseTarget,
-        animationSpec = spring(stiffness = 500f),
+        animationSpec = spring(stiffness = 500f, dampingRatio = 0.5f),
         label = "bookmarkPulse"
     )
     LaunchedEffect(isBookmarked) {
         if (isBookmarked != previousBookmarked) {
             previousBookmarked = isBookmarked
-            pulseTarget = 1.3f
+            pulseTarget = 1.4f
             kotlinx.coroutines.delay(50L)
             pulseTarget = 1f
         }
@@ -89,34 +91,42 @@ fun FactCard(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 4.dp)
-            .clip(RoundedCornerShape(13.dp))
+            .padding(horizontal = 16.dp, vertical = 6.dp)
+            .clip(RoundedCornerShape(16.dp))
     ) {
         Box(
             modifier = Modifier
                 .matchParentSize()
                 .drawBehind {
                     drawRoundRect(
-                        color = Color(0xFF111620),
-                        cornerRadius = CornerRadius(13.dp.toPx())
+                        color = Color(0xFF0D1219),
+                        cornerRadius = CornerRadius(16.dp.toPx())
                     )
+                    
                     drawRoundRect(
                         brush = Brush.horizontalGradient(
                             colors = listOf(accent.copy(alpha = 0.08f), Color.Transparent),
-                            startX = 0f, endX = size.width * 0.4f
+                            startX = 0f, endX = size.width * 0.5f
                         ),
-                        cornerRadius = CornerRadius(13.dp.toPx())
+                        cornerRadius = CornerRadius(16.dp.toPx())
                     )
+                    
                     drawRoundRect(
                         brush = Brush.verticalGradient(
-                            colors = listOf(Color.White.copy(alpha = 0.04f), Color.Transparent),
-                            startY = 0f, endY = size.height * 0.3f
+                            colors = listOf(Color.White.copy(alpha = 0.06f), Color.Transparent),
+                            startY = 0f, endY = size.height * 0.4f
                         ),
-                        cornerRadius = CornerRadius(13.dp.toPx())
+                        cornerRadius = CornerRadius(16.dp.toPx())
                     )
+                    
                     drawRoundRect(
-                        color = DarkBorder.copy(alpha = 0.6f),
-                        cornerRadius = CornerRadius(13.dp.toPx()),
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                DarkBorder.copy(alpha = 0.8f),
+                                DarkBorder.copy(alpha = 0.3f)
+                            )
+                        ),
+                        cornerRadius = CornerRadius(16.dp.toPx()),
                         style = Stroke(width = 0.5.dp.toPx())
                     )
                 }
@@ -131,34 +141,44 @@ fun FactCard(
                 modifier = Modifier
                     .width(4.dp)
                     .fillMaxHeight()
-                    .padding(vertical = 10.dp)
+                    .padding(vertical = 14.dp)
                     .clip(RoundedCornerShape(2.dp))
-                    .background(accent)
+                    .background(
+                        Brush.verticalGradient(
+                            listOf(accent, accent.copy(alpha = 0.6f))
+                        )
+                    )
+                    .drawBehind {
+                        drawCircle(
+                            color = accent.copy(alpha = 0.25f),
+                            radius = size.width * 2f,
+                            center = Offset(size.width / 2, size.height / 2)
+                        )
+                    }
             )
 
             Column(
                 modifier = Modifier
                     .weight(1f)
-                    .padding(start = 13.dp, end = 6.dp, top = 11.dp, bottom = 13.dp)
+                    .padding(start = 16.dp, end = 8.dp, top = 14.dp, bottom = 16.dp)
             ) {
                 if (animalName != null) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
                         if (symbolResId != 0) {
                             Box(
                                 modifier = Modifier
-                                    .size(22.dp)
+                                    .size(24.dp)
                                     .drawBehind {
                                         drawCircle(
                                             brush = Brush.radialGradient(
                                                 colors = listOf(
-                                                    accent.copy(alpha = 0.15f),
+                                                    accent.copy(alpha = 0.18f),
                                                     Color.Transparent
                                                 )
-                                            ),
-                                            radius = size.minDimension / 2
+                                            )
                                         )
                                     },
                                 contentAlignment = Alignment.Center
@@ -172,11 +192,11 @@ fun FactCard(
                             }
                         }
                         Text(
-                            text = animalName,
+                            text = animalName.uppercase(),
                             style = MaterialTheme.typography.labelSmall.copy(
-                                fontWeight = FontWeight.Bold,
-                                letterSpacing = 0.3.sp,
-                                fontSize = 10.sp
+                                fontWeight = FontWeight.ExtraBold,
+                                letterSpacing = 1.5.sp,
+                                fontSize = 9.sp
                             ),
                             color = accent
                         )
@@ -184,10 +204,14 @@ fun FactCard(
 
                     Box(
                         modifier = Modifier
-                            .padding(top = 8.dp, bottom = 10.dp, end = 6.dp)
+                            .padding(top = 10.dp, bottom = 12.dp, end = 12.dp)
                             .fillMaxWidth()
                             .height(0.5.dp)
-                            .background(Color.White.copy(alpha = 0.07f))
+                            .background(
+                                Brush.horizontalGradient(
+                                    listOf(Color.White.copy(alpha = 0.12f), Color.Transparent)
+                                )
+                            )
                     )
                 }
 
@@ -200,17 +224,13 @@ fun FactCard(
 
                     Box(
                         modifier = Modifier
-                            .size(35.dp)
+                            .size(40.dp)
                             .clip(CircleShape)
                             .background(
-                                if (isBookmarked) accent.copy(alpha = 0.12f)
-                                else Color.Transparent
+                                if (isBookmarked) accent.copy(alpha = 0.15f)
+                                else Color.White.copy(alpha = 0.05f)
                             )
-                            .clickable(
-                                interactionSource = remember { MutableInteractionSource() },
-                                indication = ripple(bounded = true, radius = 17.dp),
-                                onClick = onBookmarkToggle
-                            ),
+                            .bounceClick(onBookmarkToggle),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
@@ -219,7 +239,7 @@ fun FactCard(
                             else stringResource(R.string.tip_add_bookmark),
                             tint = if (isBookmarked) accent else TextTertiary,
                             modifier = Modifier
-                                .size(17.dp)
+                                .size(18.dp)
                                 .graphicsLayer {
                                     scaleX = pulseScale
                                     scaleY = pulseScale
@@ -228,13 +248,14 @@ fun FactCard(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(10.dp))
+                Spacer(modifier = Modifier.height(12.dp))
 
                 Text(
                     text = fact.title,
                     style = MaterialTheme.typography.titleSmall.copy(
-                        fontWeight = FontWeight.SemiBold,
-                        letterSpacing = (-0.2).sp
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = (-0.1).sp,
+                        fontSize = 16.sp
                     ),
                     color = TextPrimary
                 )
@@ -244,8 +265,8 @@ fun FactCard(
                 Text(
                     text = fact.body,
                     style = MaterialTheme.typography.bodySmall.copy(
-                        lineHeight = 20.sp,
-                        letterSpacing = 0.1.sp
+                        lineHeight = 22.sp,
+                        letterSpacing = 0.2.sp
                     ),
                     color = TextSecondary
                 )

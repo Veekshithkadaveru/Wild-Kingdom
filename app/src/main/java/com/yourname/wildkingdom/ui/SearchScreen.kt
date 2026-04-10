@@ -52,6 +52,7 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
@@ -71,6 +72,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.yourname.wildkingdom.R
 import com.yourname.wildkingdom.ui.components.CategoryBadge
+import com.yourname.wildkingdom.ui.components.bounceClick
+import com.yourname.wildkingdom.ui.components.pressEffect
 import com.yourname.wildkingdom.ui.theme.DarkBackground
 import com.yourname.wildkingdom.ui.theme.DarkBorder
 import com.yourname.wildkingdom.ui.theme.TextPrimary
@@ -124,7 +127,7 @@ fun SearchScreen(
                 }
             }
 
-            itemsIndexed(results, key = { _, r -> r.fact.id }) { index, result ->
+            itemsIndexed(results, key = { _, r -> "${r.animalId}_${r.fact.id}" }) { index, result ->
                 AnimatedVisibility(
                     visible = true,
                     enter = fadeIn(tween(200)) +
@@ -160,14 +163,16 @@ private fun SearchHeader(
     ) {
         Box(
             modifier = Modifier
-                .size(40.dp)
+                .size(44.dp)
                 .clip(CircleShape)
-                .background(Color.White.copy(alpha = 0.08f))
-                .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = ripple(bounded = true, radius = 20.dp),
-                    onClick = onBackClick
-                ),
+                .background(Color.White.copy(alpha = 0.06f))
+                .drawBehind {
+                    drawCircle(
+                        color = Color.White.copy(alpha = 0.04f),
+                        style = androidx.compose.ui.graphics.drawscope.Stroke(width = 1.dp.toPx())
+                    )
+                }
+                .bounceClick(onBackClick),
             contentAlignment = Alignment.Center
         ) {
             Icon(
@@ -434,47 +439,43 @@ private fun SearchResultCard(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp, vertical = 4.dp)
-            .clip(RoundedCornerShape(14.dp))
-            .clickable(
-                interactionSource = remember { MutableInteractionSource() },
-                indication = ripple(bounded = true, color = accent.copy(alpha = 0.2f)),
-                onClick = onClick
-            )
+            .padding(horizontal = 16.dp, vertical = 6.dp)
+            .clip(RoundedCornerShape(16.dp))
+            .pressEffect(onClick)
     ) {
         Box(
             modifier = Modifier
                 .matchParentSize()
                 .drawBehind {
                     drawRoundRect(
-                        color = Color(0xFF111620),
-                        cornerRadius = CornerRadius(14.dp.toPx())
+                        color = Color(0xFF0D1219),
+                        cornerRadius = CornerRadius(16.dp.toPx())
                     )
                     drawRoundRect(
                         brush = Brush.horizontalGradient(
                             colors = listOf(
-                                accent.copy(alpha = 0.06f),
+                                accent.copy(alpha = 0.08f),
                                 Color.Transparent
                             ),
                             startX = 0f,
                             endX = size.width * 0.5f
                         ),
-                        cornerRadius = CornerRadius(14.dp.toPx())
+                        cornerRadius = CornerRadius(16.dp.toPx())
                     )
                     drawRoundRect(
                         brush = Brush.verticalGradient(
                             colors = listOf(
-                                Color.White.copy(alpha = 0.03f),
+                                Color.White.copy(alpha = 0.05f),
                                 Color.Transparent
                             ),
                             startY = 0f,
-                            endY = size.height * 0.35f
+                            endY = size.height * 0.4f
                         ),
-                        cornerRadius = CornerRadius(14.dp.toPx())
+                        cornerRadius = CornerRadius(16.dp.toPx())
                     )
                     drawRoundRect(
-                        color = DarkBorder.copy(alpha = 0.5f),
-                        cornerRadius = CornerRadius(14.dp.toPx()),
+                        color = DarkBorder.copy(alpha = 0.6f),
+                        cornerRadius = CornerRadius(16.dp.toPx()),
                         style = Stroke(width = 0.5.dp.toPx())
                     )
                 }
@@ -487,11 +488,22 @@ private fun SearchResultCard(
         ) {
             Box(
                 modifier = Modifier
-                    .width(3.dp)
+                    .width(4.dp)
                     .fillMaxHeight()
-                    .padding(vertical = 10.dp)
+                    .padding(vertical = 12.dp)
                     .clip(RoundedCornerShape(2.dp))
-                    .background(accent)
+                    .background(
+                        Brush.verticalGradient(
+                            listOf(accent, accent.copy(alpha = 0.6f))
+                        )
+                    )
+                    .drawBehind {
+                        drawCircle(
+                            color = accent.copy(alpha = 0.2f),
+                            radius = size.width * 2f,
+                            center = Offset(size.width / 2, size.height / 2)
+                        )
+                    }
             )
 
             Column(
@@ -619,7 +631,8 @@ private fun HighlightedText(
     baseColor: Color,
     maxLines: Int = Int.MAX_VALUE
 ) {
-    if (highlight.isBlank()) {
+    val hlTrimmed = highlight.trim()
+    if (hlTrimmed.isEmpty()) {
         Text(
             text = text,
             style = style,
@@ -631,11 +644,9 @@ private fun HighlightedText(
     }
 
     val annotated = buildAnnotatedString {
-        val lower = text.lowercase()
-        val hlLower = highlight.trim().lowercase()
         var start = 0
         while (start < text.length) {
-            val idx = lower.indexOf(hlLower, start)
+            val idx = text.indexOf(hlTrimmed, startIndex = start, ignoreCase = true)
             if (idx == -1) {
                 withStyle(SpanStyle(color = baseColor)) {
                     append(text.substring(start))
@@ -654,9 +665,9 @@ private fun HighlightedText(
                     background = accentColor.copy(alpha = 0.10f)
                 )
             ) {
-                append(text.substring(idx, idx + hlLower.length))
+                append(text.substring(idx, idx + hlTrimmed.length))
             }
-            start = idx + hlLower.length
+            start = idx + hlTrimmed.length
         }
     }
 

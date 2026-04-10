@@ -1,15 +1,19 @@
 package com.yourname.wildkingdom.ui
 
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -68,6 +72,8 @@ import com.yourname.wildkingdom.R
 import com.yourname.wildkingdom.data.model.Animal
 import com.yourname.wildkingdom.data.model.Tab
 import com.yourname.wildkingdom.ui.components.FactCard
+import com.yourname.wildkingdom.ui.components.bounceClick
+import com.yourname.wildkingdom.ui.components.pressEffect
 import com.yourname.wildkingdom.ui.theme.DarkBackground
 import com.yourname.wildkingdom.ui.theme.DarkBorder
 import com.yourname.wildkingdom.ui.theme.DarkSurfaceHigh
@@ -463,44 +469,106 @@ private fun AnimalHeader(
                 }
 
                 if (symbolResId != 0) {
-                    val infiniteTransition = rememberInfiniteTransition(label = "symbolRotation")
-                    val rotation by infiniteTransition.animateFloat(
-                        initialValue = 0f,
-                        targetValue = 90f,
+                    val infiniteTransition = rememberInfiniteTransition(label = "symbolPremium")
+                    
+                    val floatValue by infiniteTransition.animateFloat(
+                        initialValue = -8f,
+                        targetValue = 8f,
                         animationSpec = infiniteRepeatable(
-                            animation = tween(durationMillis = 20000, easing = LinearEasing),
+                            animation = tween(3200, easing = FastOutSlowInEasing),
                             repeatMode = RepeatMode.Reverse
                         ),
-                        label = "rotation"
+                        label = "float"
+                    )
+
+                    val pulseScale by infiniteTransition.animateFloat(
+                        initialValue = 1f,
+                        targetValue = 1.25f,
+                        animationSpec = infiniteRepeatable(
+                            animation = tween(2400, easing = FastOutSlowInEasing),
+                            repeatMode = RepeatMode.Reverse
+                        ),
+                        label = "pulse"
+                    )
+                    
+                    val pulseAlpha by infiniteTransition.animateFloat(
+                        initialValue = 0.35f,
+                        targetValue = 0f,
+                        animationSpec = infiniteRepeatable(
+                            animation = tween(2400, easing = FastOutSlowInEasing),
+                            repeatMode = RepeatMode.Reverse
+                        ),
+                        label = "pulseAlpha"
+                    )
+
+                    val imageRotation by infiniteTransition.animateFloat(
+                        initialValue = -3f,
+                        targetValue = 3f,
+                        animationSpec = infiniteRepeatable(
+                            animation = tween(3000, easing = FastOutSlowInEasing),
+                            repeatMode = RepeatMode.Reverse
+                        ),
+                        label = "imageRotation"
+                    )
+
+                    val imageScale by infiniteTransition.animateFloat(
+                        initialValue = 0.95f,
+                        targetValue = 1.05f,
+                        animationSpec = infiniteRepeatable(
+                            animation = tween(2800, easing = FastOutSlowInEasing),
+                            repeatMode = RepeatMode.Reverse
+                        ),
+                        label = "imageScale"
                     )
 
                     Box(
                         modifier = Modifier
-                            .size(112.dp)
-                            .padding(top = 4.dp),
+                            .size(156.dp)
+                            .padding(top = 8.dp)
+                            .graphicsLayer { translationY = floatValue },
                         contentAlignment = Alignment.Center
                     ) {
                         Box(
                             modifier = Modifier
-                                .size(112.dp)
+                                .size(130.dp)
+                                .graphicsLayer {
+                                    scaleX = pulseScale
+                                    scaleY = pulseScale
+                                    alpha = pulseAlpha
+                                }
+                                .drawBehind {
+                                    drawCircle(
+                                        color = accent,
+                                        style = Stroke(width = 1.2.dp.toPx())
+                                    )
+                                }
+                        )
+
+                        Box(
+                            modifier = Modifier
+                                .size(156.dp)
                                 .drawBehind {
                                     drawCircle(
                                         brush = Brush.radialGradient(
                                             colors = listOf(
-                                                accent.copy(alpha = 0.12f),
+                                                accent.copy(alpha = 0.18f),
                                                 Color.Transparent
                                             )
-                                        ),
-                                        radius = size.minDimension / 2
+                                        )
                                     )
                                 }
                         )
+
                         Image(
                             painter = painterResource(id = symbolResId),
                             contentDescription = animal.name,
                             modifier = Modifier
-                                .size(90.dp)
-                                .graphicsLayer { rotationZ = rotation },
+                                .size(125.dp)
+                                .graphicsLayer {
+                                    rotationZ = imageRotation
+                                    scaleX = imageScale
+                                    scaleY = imageScale
+                                },
                             contentScale = ContentScale.Fit
                         )
                     }
@@ -644,69 +712,68 @@ private fun AnimalTabs(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 16.dp)
-            .padding(top = 12.dp, bottom = 8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+            .padding(top = 16.dp, bottom = 10.dp),
+        horizontalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         tabs.forEach { tab ->
             val isSelected = tab.id == activeTabId
+            val selectionProgress by animateFloatAsState(
+                targetValue = if (isSelected) 1f else 0f,
+                animationSpec = spring(stiffness = Spring.StiffnessMedium),
+                label = "tabSelection"
+            )
 
             Box(
                 modifier = Modifier
                     .weight(1f)
-                    .clip(RoundedCornerShape(12.dp))
-                    .then(
-                        if (isSelected) {
-                            Modifier.drawBehind {
-                                drawRoundRect(
-                                    color = accent.copy(alpha = 0.15f),
-                                    cornerRadius = CornerRadius(12.dp.toPx())
-                                )
-                                drawRoundRect(
-                                    brush = Brush.verticalGradient(
-                                        colors = listOf(
-                                            Color.White.copy(alpha = 0.05f),
-                                            Color.Transparent
-                                        ),
-                                        startY = 0f,
-                                        endY = size.height * 0.5f
-                                    ),
-                                    cornerRadius = CornerRadius(12.dp.toPx())
-                                )
-                                drawRoundRect(
-                                    color = accent.copy(alpha = 0.4f),
-                                    cornerRadius = CornerRadius(12.dp.toPx()),
-                                    style = Stroke(width = 0.5.dp.toPx())
-                                )
-                            }
+                    .clip(RoundedCornerShape(14.dp))
+                    .drawBehind {
+                        if (selectionProgress > 0f) {
+                            drawRoundRect(
+                                color = accent.copy(alpha = 0.12f * selectionProgress),
+                                cornerRadius = CornerRadius(14.dp.toPx())
+                            )
+                            drawRoundRect(
+                                brush = Brush.verticalGradient(
+                                    colors = listOf(
+                                        Color.White.copy(alpha = 0.08f * selectionProgress),
+                                        Color.Transparent
+                                    )
+                                ),
+                                cornerRadius = CornerRadius(14.dp.toPx())
+                            )
                         } else {
-                            Modifier.drawBehind {
-                                drawRoundRect(
-                                    color = DarkSurfaceHigh.copy(alpha = 0.5f),
-                                    cornerRadius = CornerRadius(12.dp.toPx())
-                                )
-                                drawRoundRect(
-                                    color = DarkBorder.copy(alpha = 0.3f),
-                                    cornerRadius = CornerRadius(12.dp.toPx()),
-                                    style = Stroke(width = 0.5.dp.toPx())
-                                )
-                            }
+                            drawRoundRect(
+                                color = DarkSurfaceHigh.copy(alpha = 0.4f),
+                                cornerRadius = CornerRadius(14.dp.toPx())
+                            )
                         }
+                    }
+                    .border(
+                        width = 0.6.dp,
+                        brush = if (isSelected) {
+                            Brush.verticalGradient(
+                                listOf(accent.copy(alpha = 0.5f), accent.copy(alpha = 0.2f))
+                            )
+                        } else {
+                            Brush.verticalGradient(
+                                listOf(DarkBorder.copy(alpha = 0.3f), Color.Transparent)
+                            )
+                        },
+                        shape = RoundedCornerShape(14.dp)
                     )
-                    .clickable(
-                        interactionSource = remember { MutableInteractionSource() },
-                        indication = ripple(bounded = true, color = accent.copy(alpha = 0.3f)),
-                        onClick = { onTabSelected(tab.id) }
-                    )
-                    .padding(vertical = 12.dp),
+                    .bounceClick { onTabSelected(tab.id) }
+                    .padding(vertical = 14.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = tab.label,
+                    text = tab.label.uppercase(),
                     style = MaterialTheme.typography.labelMedium.copy(
-                        fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Medium,
-                        letterSpacing = 1.6.sp
+                        fontWeight = if (isSelected) FontWeight.ExtraBold else FontWeight.Bold,
+                        letterSpacing = 1.8.sp,
+                        fontSize = 11.sp
                     ),
-                    color = if (isSelected) accent else TextTertiary
+                    color = if (isSelected) accent else TextTertiary.copy(alpha = 0.7f)
                 )
             }
         }

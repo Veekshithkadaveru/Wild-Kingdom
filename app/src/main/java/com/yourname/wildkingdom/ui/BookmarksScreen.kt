@@ -33,6 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -43,6 +44,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.yourname.wildkingdom.R
 import com.yourname.wildkingdom.ui.components.AppIcons
 import com.yourname.wildkingdom.ui.components.FactCard
+import com.yourname.wildkingdom.ui.components.bounceClick
+import com.yourname.wildkingdom.ui.components.pressEffect
 import com.yourname.wildkingdom.ui.theme.DarkBackground
 import com.yourname.wildkingdom.ui.theme.TextSecondary
 import com.yourname.wildkingdom.ui.theme.TextTertiary
@@ -117,14 +120,16 @@ private fun BookmarksHeader(
     ) {
         Box(
             modifier = Modifier
-                .size(40.dp)
+                .size(44.dp)
                 .clip(CircleShape)
-                .background(Color.White.copy(alpha = 0.08f))
-                .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = ripple(bounded = true, radius = 20.dp),
-                    onClick = onBackClick
-                ),
+                .background(Color.White.copy(alpha = 0.06f))
+                .drawBehind {
+                    drawCircle(
+                        color = Color.White.copy(alpha = 0.04f),
+                        style = androidx.compose.ui.graphics.drawscope.Stroke(width = 1.dp.toPx())
+                    )
+                }
+                .bounceClick(onBackClick),
             contentAlignment = Alignment.Center
         ) {
             Icon(
