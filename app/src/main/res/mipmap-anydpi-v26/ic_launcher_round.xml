@@ -3,8 +3,8 @@
     <background android:drawable="@color/ic_launcher_background" />
     <foreground>
         <inset
-            android:drawable="@drawable/ic_splash_logo"
+            android:drawable="@drawable/tiger_sym_7"
             android:inset="14%" />
     </foreground>
-    <monochrome android:drawable="@drawable/ic_splash_logo" />
+    <monochrome android:drawable="@drawable/tiger_sym_7" />
 </adaptive-icon>
