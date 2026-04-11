@@ -18,3 +18,12 @@ Tiger_N
 Tiger_N_elements
 .claude
 .idea
+
+# Unnecessary & Release Files
+Untitled
+.kotlin/
+app/release/
+*.apk
+*.aab
+*.jks
+*.keystore

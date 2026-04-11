@@ -32,15 +32,15 @@
 -keepclassmembers,allowobfuscation class * {
     @com.google.gson.annotations.SerializedName <fields>;
 }
--keep class com.yourname.wildkingdom.data.model.** { <fields>; <init>(...); }
--keep class com.yourname.wildkingdom.data.AnimalsJson { *; }
--keepclassmembers enum com.yourname.wildkingdom.data.model.** {
+-keep class app.krafted.wildkingdom.data.model.** { <fields>; <init>(...); }
+-keep class app.krafted.wildkingdom.data.AnimalsJson { *; }
+-keepclassmembers enum app.krafted.wildkingdom.data.model.** {
     public static **[] values();
     public static ** valueOf(java.lang.String);
 }
 
 # --- Room ---
--keep class com.yourname.wildkingdom.data.db.** { *; }
+-keep class app.krafted.wildkingdom.data.db.** { *; }
 -keep class * extends androidx.room.RoomDatabase
 -keep @androidx.room.Entity class *
 -keep @androidx.room.Dao class *

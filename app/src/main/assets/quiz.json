@@ -1,0 +1,214 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "question": "What is the top speed of a tiger in short bursts?",
+      "options": ["30–45 km/h", "49–65 km/h", "70–85 km/h", "100–110 km/h"],
+      "correctAnswerIndex": 1,
+      "explanation": "Tigers can reach speeds of 49–65 km/h in short bursts. Their hind legs are longer than their front legs, giving them explosive acceleration."
+    },
+    {
+      "id": 2,
+      "question": "Why are tiger stripe patterns important to researchers?",
+      "options": ["They indicate the tiger's age", "Every pattern is unique like a fingerprint", "They reveal the tiger's gender", "They show which subspecies it belongs to"],
+      "correctAnswerIndex": 1,
+      "explanation": "Every tiger's stripe pattern is completely unique — like a human fingerprint. Researchers use photographic identification of stripe patterns to track individual tigers."
+    },
+    {
+      "id": 3,
+      "question": "What is a tiger's typical hunting success rate?",
+      "options": ["5–10%", "10–15%", "30–40%", "60–70%"],
+      "correctAnswerIndex": 1,
+      "explanation": "Their hunting success rate is only 10–15% — they fail more than they succeed."
+    },
+    {
+      "id": 4,
+      "question": "How far can a lion's roar be heard?",
+      "options": ["Up to 1 kilometre", "Up to 3 kilometres", "Up to 8 kilometres", "Up to 15 kilometres"],
+      "correctAnswerIndex": 2,
+      "explanation": "A lion's roar can be heard up to 8 kilometres away and is used to communicate territory boundaries to rival prides."
+    },
+    {
+      "id": 5,
+      "question": "How many hours per day do lions typically sleep?",
+      "options": ["Up to 8 hours", "Up to 12 hours", "Up to 16 hours", "Up to 20 hours"],
+      "correctAnswerIndex": 3,
+      "explanation": "Lions sleep up to 20 hours per day — more than almost any other mammal. This extreme rest conserves energy in the hot African savanna."
+    },
+    {
+      "id": 6,
+      "question": "What makes lions unique among wild cats?",
+      "options": ["They can roar the loudest", "They live in social groups called prides", "They are the fastest cat", "They can swim long distances"],
+      "correctAnswerIndex": 1,
+      "explanation": "Lions are unique among wild cats in living in social groups called prides. A pride typically consists of 2–3 related males, several females, and their cubs."
+    },
+    {
+      "id": 7,
+      "question": "What top speed can lions reach in short bursts?",
+      "options": ["50 km/h", "65 km/h", "80 km/h", "95 km/h"],
+      "correctAnswerIndex": 2,
+      "explanation": "Lions can reach 80 km/h in short bursts but cannot sustain this speed. Their power lies in explosive short-distance acceleration."
+    },
+    {
+      "id": 8,
+      "question": "How many species have been recorded as leopard prey?",
+      "options": ["Over 30", "Over 50", "Over 70", "Over 90"],
+      "correctAnswerIndex": 3,
+      "explanation": "Leopards have the most varied diet of any big cat — recorded prey includes over 90 species from beetles and baboons to young giraffes."
+    },
+    {
+      "id": 9,
+      "question": "Why do leopards haul their kills up into trees?",
+      "options": ["To dry the meat", "To escape floods", "To cache kills safe from scavengers", "To feed their young more easily"],
+      "correctAnswerIndex": 2,
+      "explanation": "Leopards are exceptional climbers and routinely haul prey up into trees to cache kills safe from lions, hyenas, and other scavengers."
+    },
+    {
+      "id": 10,
+      "question": "Why are leopards called 'Ghost Cats'?",
+      "options": ["They are white in colour", "They are extremely secretive and hard to observe", "They only hunt during full moons", "They live in caves"],
+      "correctAnswerIndex": 1,
+      "explanation": "Leopards are notoriously difficult to observe even in areas with high populations. Their secretive nocturnal habits and cryptic camouflage earn them the nickname."
+    },
+    {
+      "id": 11,
+      "question": "What is the typical structure of a wolf pack?",
+      "options": ["Random grouping of wolves", "A breeding pair and their offspring", "Only adult males", "Unrelated wolves that form alliances"],
+      "correctAnswerIndex": 1,
+      "explanation": "Wolf packs are family units typically led by a breeding pair (alpha pair) and their offspring from multiple years."
+    },
+    {
+      "id": 12,
+      "question": "How did wolf reintroduction change Yellowstone?",
+      "options": ["It reduced tourism", "It triggered a trophic cascade restoring the ecosystem", "It caused river flooding", "It had no significant effect"],
+      "correctAnswerIndex": 1,
+      "explanation": "The reintroduction of wolves to Yellowstone in 1995 triggered a trophic cascade that restored vegetation, stabilised riverbanks, and rebalanced the entire ecosystem."
+    },
+    {
+      "id": 13,
+      "question": "Why are wolves considered a 'keystone species'?",
+      "options": ["They are the largest predator", "Their presence regulates entire ecosystems", "They build dens that other animals use", "They disperse plant seeds"],
+      "correctAnswerIndex": 1,
+      "explanation": "Wolves are a keystone species because their presence controls herbivore populations, which in turn affects vegetation growth and the health of entire ecosystems."
+    },
+    {
+      "id": 14,
+      "question": "How long can a bear hibernate without eating or drinking?",
+      "options": ["Up to 2 months", "Up to 5 months", "Up to 7 months", "Up to 12 months"],
+      "correctAnswerIndex": 2,
+      "explanation": "Bears can hibernate for up to 7 months, during which their heart rate drops dramatically and they survive entirely on stored body fat without eating, drinking, or excreting waste."
+    },
+    {
+      "id": 15,
+      "question": "What makes bears exceptional among large predators?",
+      "options": ["Their speed", "Their exceptional intelligence and memory", "Their nocturnal vision", "Their pack hunting"],
+      "correctAnswerIndex": 1,
+      "explanation": "Bears demonstrate exceptional intelligence — they can remember food sources from years prior, use tools, and have been observed opening complex locks and latches."
+    },
+    {
+      "id": 16,
+      "question": "How much can a large grizzly bear weigh?",
+      "options": ["Up to 250 kg", "Up to 450 kg", "Up to 680 kg", "Up to 900 kg"],
+      "correctAnswerIndex": 2,
+      "explanation": "Grizzly bears can weigh up to 680 kg. Coastal brown bears with access to salmon are the largest, particularly in Alaska's Katmai National Park."
+    },
+    {
+      "id": 17,
+      "question": "How far away can an eagle spot a rabbit?",
+      "options": ["500 metres", "1 kilometre", "3 kilometres", "5 kilometres"],
+      "correctAnswerIndex": 2,
+      "explanation": "Eagles have extraordinary vision — up to 8 times sharper than a human's — capable of spotting a rabbit from over 3 kilometres away."
+    },
+    {
+      "id": 18,
+      "question": "What diving speed can a golden eagle reach?",
+      "options": ["Up to 100 km/h", "Up to 200 km/h", "Up to 320 km/h", "Up to 400 km/h"],
+      "correctAnswerIndex": 2,
+      "explanation": "Golden eagles can reach speeds exceeding 320 km/h in a hunting stoop (dive), making them one of the fastest animals on earth."
+    },
+    {
+      "id": 19,
+      "question": "What is unique about eagle partnerships?",
+      "options": ["They hunt in flocks", "They mate for life and share a nest for decades", "Males raise the chicks alone", "They migrate in pairs"],
+      "correctAnswerIndex": 1,
+      "explanation": "Eagles form lifetime partnerships and return to the same nest year after year, adding material each season — some nests grow to over 2 metres across and weigh nearly a tonne."
+    },
+    {
+      "id": 20,
+      "question": "How do snakes sense their environment without ears?",
+      "options": ["Using echolocation", "Through ground vibrations and a forked tongue collecting scent particles", "By sight alone", "Using electromagnetic fields"],
+      "correctAnswerIndex": 1,
+      "explanation": "Snakes sense the world through ground vibrations detected by their jawbones and a forked tongue that collects scent particles, analysed by the Jacobson's organ."
+    },
+    {
+      "id": 21,
+      "question": "How can snakes swallow prey larger than their head?",
+      "options": ["They chew it into pieces first", "Their jaws unhinge and stretch with elastic ligaments", "They dissolve prey with venom before eating", "They only eat small insects"],
+      "correctAnswerIndex": 1,
+      "explanation": "Snake jawbones are connected by elastic ligaments rather than fused, allowing the mouth to stretch enormously to swallow prey much larger than the snake's own head."
+    },
+    {
+      "id": 22,
+      "question": "Which tiger subspecies is the smallest?",
+      "options": ["Bengal tiger", "Siberian tiger", "Sumatran tiger", "Malayan tiger"],
+      "correctAnswerIndex": 2,
+      "explanation": "The Siberian tiger is the largest subspecies, while the Sumatran tiger is the smallest."
+    },
+    {
+      "id": 23,
+      "question": "What is the estimated global wild tiger population?",
+      "options": ["500–1,000", "3,900–4,500", "10,000–15,000", "50,000+"],
+      "correctAnswerIndex": 1,
+      "explanation": "The global wild tiger population is estimated at just 3,900–4,500 individuals — a devastating decline from over 100,000 at the start of the 20th century."
+    },
+    {
+      "id": 24,
+      "question": "How far can a leopard leap horizontally?",
+      "options": ["Up to 2 metres", "Up to 4 metres", "Up to 6 metres", "Up to 10 metres"],
+      "correctAnswerIndex": 2,
+      "explanation": "Leopards can reach 58 km/h and are extraordinary leapers — jumping up to 6 metres horizontally and 3 metres vertically from a standing position."
+    },
+    {
+      "id": 25,
+      "question": "What is unique about wolf howling?",
+      "options": ["Only alpha wolves howl", "Each wolf has a unique voice and packs harmonise deliberately", "They only howl at the moon", "It is a sign of distress"],
+      "correctAnswerIndex": 1,
+      "explanation": "Each wolf has a unique voice — howling is used to communicate territory boundaries, coordinate hunts, and strengthen social bonds. Packs deliberately harmonise to sound larger."
+    },
+    {
+      "id": 26,
+      "question": "What threat do wind turbines pose to eagles?",
+      "options": ["Noise pollution", "Blade strikes and electrocution from power lines", "Habitat flooding", "Light pollution"],
+      "correctAnswerIndex": 1,
+      "explanation": "Wind turbine blade strikes and electrocution from associated power infrastructure are a growing threat to eagle populations worldwide."
+    },
+    {
+      "id": 27,
+      "question": "Why do snakes shed their skin?",
+      "options": ["To change colour", "Because their skin doesn't grow with them", "To remove external parasites", "For temperature regulation"],
+      "correctAnswerIndex": 1,
+      "explanation": "Snake skin doesn't grow with the animal. As a snake grows, it periodically sheds the entire outer layer of skin in a single piece, revealing fresh scales beneath."
+    },
+    {
+      "id": 28,
+      "question": "How much meat does an adult tiger need per day?",
+      "options": ["About 3 kg", "About 9 kg", "About 20 kg", "About 35 kg"],
+      "correctAnswerIndex": 1,
+      "explanation": "An adult tiger needs around 9 kg of meat per day but typically eats only every 3–4 days, consuming up to 40 kg in a single meal."
+    },
+    {
+      "id": 29,
+      "question": "What is the IUCN status of the African lion?",
+      "options": ["Least Concern", "Vulnerable", "Endangered", "Critically Endangered"],
+      "correctAnswerIndex": 1,
+      "explanation": "Lions are classified as Vulnerable on the IUCN Red List. African lion populations have declined by approximately 43% over the past 21 years."
+    },
+    {
+      "id": 30,
+      "question": "How do bears catch salmon?",
+      "options": ["They dive underwater", "They stand at waterfalls and catch leaping fish mid-air", "They use their tails as lures", "They dam small streams"],
+      "correctAnswerIndex": 1,
+      "explanation": "Bears famously stand at waterfalls during salmon runs, catching leaping fish mid-air with remarkable precision — a technique passed from mothers to cubs."
+    }
+  ]
+}

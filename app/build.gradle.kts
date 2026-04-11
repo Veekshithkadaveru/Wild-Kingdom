@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.yourname.wildkingdom"
+    namespace = "app.krafted.wildkingdom"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.veekshith.wildkingdom"
+        applicationId = "app.krafted.wildkingdom"
         minSdk = 26
         targetSdk = 36
         versionCode = 1
