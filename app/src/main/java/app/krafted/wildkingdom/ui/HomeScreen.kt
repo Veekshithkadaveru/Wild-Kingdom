@@ -73,6 +73,7 @@ import app.krafted.wildkingdom.ui.components.AppIcons
 import app.krafted.wildkingdom.ui.components.bounceClick
 import app.krafted.wildkingdom.ui.components.pressEffect
 import app.krafted.wildkingdom.ui.theme.DarkBackground
+import app.krafted.wildkingdom.viewmodel.HomeUiState
 import app.krafted.wildkingdom.ui.theme.DarkBorder
 import app.krafted.wildkingdom.ui.theme.TextPrimary
 import app.krafted.wildkingdom.ui.theme.TextSecondary
@@ -92,7 +93,7 @@ fun HomeScreen(
     onQuizClick: () -> Unit,
     viewModel: HomeViewModel = viewModel()
 ) {
-    val animals by viewModel.animals.collectAsState()
+    val uiState by viewModel.uiState.collectAsState()
 
     Box(
         modifier = Modifier
@@ -127,12 +128,45 @@ fun HomeScreen(
                 SectionLabel()
             }
 
-            itemsIndexed(animals, key = { _, animal -> animal.id }) { index, animal ->
-                AnimalCard(
-                    animal = animal,
-                    index = index,
-                    onClick = { onChapterClick(animal.id) }
-                )
+            when (val state = uiState) {
+                is HomeUiState.Loading -> {
+                    item {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 80.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            androidx.compose.material3.CircularProgressIndicator(
+                                color = BrandGold
+                            )
+                        }
+                    }
+                }
+                is HomeUiState.Error -> {
+                    item {
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 80.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = "Could not load animals",
+                                color = androidx.compose.ui.graphics.Color.White.copy(alpha = 0.5f)
+                            )
+                        }
+                    }
+                }
+                is HomeUiState.Success -> {
+                    itemsIndexed(state.animals, key = { _, animal -> animal.id }) { index, animal ->
+                        AnimalCard(
+                            animal = animal,
+                            index = index,
+                            onClick = { onChapterClick(animal.id) }
+                        )
+                    }
+                }
             }
         }
     }
@@ -452,7 +486,7 @@ private fun QuizBanner(onClick: () -> Unit) {
                     )
                     Spacer(modifier = Modifier.width(8.dp))
                     Text(
-                        text = "NEW CHALLENGE",
+                        text = stringResource(R.string.quiz_banner_label),
                         style = MaterialTheme.typography.labelSmall.copy(
                             letterSpacing = 2.sp,
                             fontWeight = FontWeight.ExtraBold,
@@ -498,7 +532,7 @@ private fun QuizBanner(onClick: () -> Unit) {
                         horizontalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
                         Text(
-                            text = "START",
+                            text = stringResource(R.string.quiz_banner_start),
                             style = MaterialTheme.typography.labelSmall.copy(
                                 fontWeight = FontWeight.Black,
                                 letterSpacing = 1.sp

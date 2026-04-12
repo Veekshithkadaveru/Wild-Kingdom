@@ -10,16 +10,23 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
+sealed class HomeUiState {
+    object Loading : HomeUiState()
+    data class Success(val animals: List<Animal>) : HomeUiState()
+    object Error : HomeUiState()
+}
+
 class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = AnimalRepository.getInstance(application)
 
-    private val _animals = MutableStateFlow<List<Animal>>(emptyList())
-    val animals: StateFlow<List<Animal>> = _animals.asStateFlow()
+    private val _uiState = MutableStateFlow<HomeUiState>(HomeUiState.Loading)
+    val uiState: StateFlow<HomeUiState> = _uiState.asStateFlow()
 
     init {
         viewModelScope.launch {
-            _animals.value = repository.loadAnimals()
+            val animals = repository.loadAnimals()
+            _uiState.value = if (animals.isEmpty()) HomeUiState.Error else HomeUiState.Success(animals)
         }
     }
 }

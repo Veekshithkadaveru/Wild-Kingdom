@@ -61,7 +61,6 @@ class ChapterViewModel(application: Application) : AndroidViewModel(application)
         }
         _animalId.value = animalId
         viewModelScope.launch {
-            repository.loadAnimals()
             _animalData = repository.getAnimal(animalId)
             _animalState.value = _animalData
             if (highlightFactId != null) {

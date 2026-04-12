@@ -186,7 +186,9 @@ fun ChapterScreen(
             if (currentHighlightId != null && filteredFacts.isNotEmpty()) {
                 val factIndex = filteredFacts.indexOfFirst { it.id == currentHighlightId }
                 if (factIndex >= 0) {
-                    listState.animateScrollToItem(factIndex + 4)
+                    // 4 fixed header items: AnimalHeader, HeroFactCard, SectionLabel, AnimalTabs
+                val headerItemCount = 4
+                listState.animateScrollToItem(factIndex + headerItemCount)
                 }
             }
         }

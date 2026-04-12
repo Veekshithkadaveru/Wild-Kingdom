@@ -27,6 +27,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -84,6 +85,22 @@ fun QuizScreen(
                     onRestart = { viewModel.restartQuiz() },
                     onHome = onBackClick
                 )
+            } else if (state.questions.isEmpty()) {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            text = stringResource(R.string.quiz_error_title),
+                            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
+                            color = Color.White
+                        )
+                        Spacer(modifier = Modifier.height(8.dp))
+                        Text(
+                            text = stringResource(R.string.quiz_error_subtitle),
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = Color.White.copy(alpha = 0.6f)
+                        )
+                    }
+                }
             } else {
                 state.currentQuestion?.let { question ->
                     QuizContent(
@@ -121,7 +138,6 @@ private fun QuizTopBar(onBackClick: () -> Unit) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .statusBarsPadding()
                 .padding(horizontal = 24.dp)
                 .padding(top = 16.dp, bottom = 24.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -145,7 +161,7 @@ private fun QuizTopBar(onBackClick: () -> Unit) {
             }
 
             Text(
-                text = "SURVIVAL QUIZ",
+                text = stringResource(R.string.quiz_title),
                 style = MaterialTheme.typography.labelLarge.copy(
                     fontWeight = FontWeight.ExtraBold,
                     letterSpacing = 2.4.sp
@@ -181,7 +197,7 @@ private fun QuizContent(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "QUESTION ${questionIndex + 1}",
+                text = stringResource(R.string.quiz_question_label, questionIndex + 1),
                 style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold, letterSpacing = 1.sp),
                 color = Color.White
             )
@@ -402,7 +418,7 @@ private fun QuizContent(
                                     )
                                     Spacer(modifier = Modifier.width(8.dp))
                                     Text(
-                                        text = "EXPLANATION",
+                                        text = stringResource(R.string.quiz_explanation_label),
                                         style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.ExtraBold, letterSpacing = 1.sp),
                                         color = BrandGold
                                     )
@@ -446,7 +462,7 @@ private fun QuizContent(
                 label = "button_text"
             ) { submitted ->
                 Text(
-                    text = if (submitted) "NEXT QUESTION" else "CONFIRM ANSWER",
+                    text = if (submitted) stringResource(R.string.quiz_button_next) else stringResource(R.string.quiz_button_confirm),
                     style = MaterialTheme.typography.titleMedium.copy(
                         fontWeight = FontWeight.ExtraBold,
                         letterSpacing = 1.sp
@@ -497,7 +513,7 @@ private fun QuizResult(
             enter = slideInVertically(initialOffsetY = { -50 }) + fadeIn(tween(500))
         ) {
             Text(
-                text = "QUIZ COMPLETED",
+                text = stringResource(R.string.quiz_completed_title),
                 style = MaterialTheme.typography.labelLarge.copy(
                     letterSpacing = 4.sp,
                     fontWeight = FontWeight.Black
@@ -539,7 +555,7 @@ private fun QuizResult(
                     color = Color.White
                 )
                 Text(
-                    text = "OUT OF $total",
+                    text = stringResource(R.string.quiz_out_of, total),
                     style = MaterialTheme.typography.labelMedium.copy(
                         letterSpacing = 2.sp,
                         fontWeight = FontWeight.Bold
@@ -558,10 +574,10 @@ private fun QuizResult(
             val percentInt = (percentage * 100).toInt()
             Text(
                 text = when {
-                    percentInt == 100 -> "Perfect Survival Sense!"
-                    percentInt >= 80 -> "Great Survival Sense!"
-                    percentInt >= 50 -> "Good Effort!"
-                    else -> "Needs More Practice!"
+                    percentInt == 100 -> stringResource(R.string.quiz_result_perfect)
+                    percentInt >= 80 -> stringResource(R.string.quiz_result_great)
+                    percentInt >= 50 -> stringResource(R.string.quiz_result_good)
+                    else -> stringResource(R.string.quiz_result_poor)
                 },
                 style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                 color = Color.White,
@@ -584,7 +600,7 @@ private fun QuizResult(
                     colors = ButtonDefaults.buttonColors(containerColor = BrandGold, contentColor = Color.Black),
                     shape = RoundedCornerShape(16.dp)
                 ) {
-                    Text("TRY AGAIN", style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold, letterSpacing = 1.sp))
+                    Text(stringResource(R.string.quiz_button_retry), style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold, letterSpacing = 1.sp))
                 }
                 
                 OutlinedButton(
@@ -596,7 +612,7 @@ private fun QuizResult(
                     border = androidx.compose.foundation.BorderStroke(1.dp, Color.White.copy(alpha = 0.2f)),
                     shape = RoundedCornerShape(16.dp)
                 ) {
-                    Text("RETURN TO HOME", style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold, letterSpacing = 1.sp))
+                    Text(stringResource(R.string.quiz_button_home), style = MaterialTheme.typography.labelLarge.copy(fontWeight = FontWeight.Bold, letterSpacing = 1.sp))
                 }
             }
         }

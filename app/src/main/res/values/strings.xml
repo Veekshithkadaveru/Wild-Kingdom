@@ -33,4 +33,23 @@
     <string name="tip_remove_bookmark">Remove bookmark</string>
     <string name="tip_add_bookmark">Add bookmark</string>
     <string name="splash_logo_description">Wild Kingdom</string>
+
+    <!-- Quiz strings -->
+    <string name="quiz_title">SURVIVAL QUIZ</string>
+    <string name="quiz_banner_label">NEW CHALLENGE</string>
+    <string name="quiz_banner_start">START</string>
+    <string name="quiz_question_label">QUESTION %d</string>
+    <string name="quiz_explanation_label">EXPLANATION</string>
+    <string name="quiz_button_confirm">CONFIRM ANSWER</string>
+    <string name="quiz_button_next">NEXT QUESTION</string>
+    <string name="quiz_completed_title">QUIZ COMPLETED</string>
+    <string name="quiz_out_of">OUT OF %d</string>
+    <string name="quiz_result_perfect">Perfect Survival Sense!</string>
+    <string name="quiz_result_great">Great Survival Sense!</string>
+    <string name="quiz_result_good">Good Effort!</string>
+    <string name="quiz_result_poor">Needs More Practice!</string>
+    <string name="quiz_button_retry">TRY AGAIN</string>
+    <string name="quiz_button_home">RETURN TO HOME</string>
+    <string name="quiz_error_title">Quiz Unavailable</string>
+    <string name="quiz_error_subtitle">Could not load questions</string>
 </resources>
